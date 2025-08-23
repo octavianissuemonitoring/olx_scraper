@@ -1,6 +1,0 @@
-olx_scraper/
-├─ scraper_olx.py                 # scriptul principal (rulezi acesta)
-├─ proxies.json                   # setările de proxy (rotating & sticky)
-├─ secrets.env                    # credențiale OLX
-├─ urls.txt                       # lista de URL-uri de pornire (câte unul pe linie)
-└─ requirements.txt               # dependențe pin-uite
