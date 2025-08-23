@@ -1,0 +1,17 @@
+﻿__pycache__/
+*.pyc
+.venv/
+.env
+*.egg-info/
+.pytest_cache/
+.vscode/
+.idea/
+*_debug/
+_debug/
+*.csv
+*.xlsx
+*.jsonl
+olx_cookies.json
+chromedriver.log
+secrets.env
+proxies.json

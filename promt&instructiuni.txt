@@ -1,0 +1,91 @@
+Context
+- Limbaj: Python 3.[[VERSION]], OS: [[Windows/Linux/macOS]].
+- Use case: scraper robust pentru [[SITE_URI_PRINCIPAL]], cu listă → anunț, extragere câmpuri + telefon.
+- Constrângeri: respectă ToS/legi, aplică rate-limit „uman” și evită overload-ul. Headless [[ON/OFF]].
+
+Cerințe funcționale
+1) Navigare & colectare:
+   - Citește seed-uri din `urls.txt` (poate conține pagini de listă sau direct anunțuri).
+   - Paginare: `?page=N` sau selector explicit dacă diferă. Limită configurabilă `MAX_PAGES_PER_SEED`.
+   - Colectează linkuri anunț din listă (inclusiv fallback-uri), normalizează URL, dedup.
+   - Ignoră linkuri externe (ex: autovit) și linkuri interne non-ofertă; loghează statistici „skipped”.
+   - Parsează „total results” dacă există (ex: „Am găsit X rezultate”).
+
+2) Extragere din anunț:
+   - Câmpuri: titlu, preț (valoare+monedă), persoană fizică/juridică, garanție, descriere (curățată), ID, vizualizări, nume vânzător, URL.
+   - Telefon: strategie în lanț:
+     a) scan DOM (inclusiv `a[href^="tel:"]`),
+     b) click robust pe toate variantele de buton „Arată telefonul” (CSS/XPath), 3 metode de click (normal/JS/ActionChains), cu așteptare 1.5–2.0s,
+     c) parsare din XHR (prin selenium-wire, `disable_encoding=True`),
+     d) fallback: deschide varianta mobilă `m.[[domeniu]]` într-un tab separat și citește `tel:`.
+   - Normalizare telefon: format RO `07xxxxxxxx`, eliminați spații, puncte, `+40` → `0`.
+
+3) Autentificare (single-login):
+   - Driver „AD” (sticky RO) reține cookies în `olx_cookies.json` (persistente între rulari).
+   - Ordine: (i) încarcă cookies → verifică login, (ii) login auto email/parolă din `secrets.env`, (iii) login asistat 90s.
+   - Driver „LIST” folosește endpoint rotating (fără login).
+   - UA fix pentru driverul logat; UA pool pentru listă.
+
+4) Proxy & rețea:
+   - Citește `proxies.json` cu două pool-uri: `ad_endpoints` (sticky) și `list_endpoints` (rotating).
+   - Suport pentru http/socks5, cu user/parolă. SSL verify configurabil.
+   - Retry cu backoff exponențial (config: base, factor, jitter) pe listă și pe anunț.
+   - Stealth CDP: elimină `navigator.webdriver`, setări `languages`, `plugins`, `platform`.
+   - Suprimă loguri zgomotoase (selenium-wire/urllib3/chromedriver).
+
+5) Export:
+   - CSV + XLSX (openpyxl) + JSONL, cu timestamp în nume, schema fixă, ordinea coloanelor stabilă.
+   - Dedup logic pe (telefon, url); dacă nu există telefon, dedup pe url.
+   - Metrici finale: `ads_visited`, `phones_found`, per pagină: `links`, `total`, `skipped autovit`, `skipped other`.
+
+Cerințe nefuncționale & standarde
+- PEP8, PEP484 typing, docstring-uri scurte pe funcții; structură modulare (helpers separate).
+- Logging: format unic `HH:MM:SS | LEVEL | [STAGE] STATUS | details`.
+- Config prin constante + fișiere externe: `urls.txt`, `proxies.json`, `secrets.env`.
+- Debug opțional: `DEBUG_SNAPSHOTS=True` → salvează `_debug/{tag_ts}/page.png`, `page.html`, `network.json`.
+- Reproducibilitate: `requirements.txt` pin-uit, instrucțiuni CLI de instalare/rulare.
+- Securitate: nu loga secretele; păstrează cookies local (opțional: param pentru locație).
+- Compatibilitate: Python 3.13, Windows; menționează subtilități (edge cases) și fallback.
+
+Inputuri concrete
+- Selectori listă/anunț:
+  - Card listă: `[data-cy='l-card']` (+ fallback `article a[href]`).
+  - Link anunț: `/d/oferta/`.
+  - Titlu: `[data-cy='offer_title'] h1|h4` sau `[data-testid='offer_title'] h1|h4`.
+  - Preț: `[data-testid='ad-price-container']`.
+  - Persoană: `[data-testid='user-type']` sau `<p>…Persoan…/Firm…</p>`.
+  - Vânzător: `[data-testid='user-profile-user-name']` / `[data-testid='user-profile-link']`.
+  - Descriere: `[data-testid='ad_description']`.
+  - Buton telefon: `[data-testid='show-phone-number']`, `[data-cy='ad-contact-phone']`, plus XPaths generice.
+- Regex:
+  - Telefon RO: `(?:\+?4?0\s*7[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})|(?:07[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})`
+  - Garanție / ID / Vizualizări: după cum le-am definit noi.
+
+Livrabile
+1) `scraper.py` – script complet, comentat, cu:
+   - funcții: config/loaders, make_driver, stealth, list parsing, ad parsing, phone pipeline, login, export, main;
+   - retry/backoff; log „STARTING/EXECUTING/END OK/END FAIL”.
+2) `proxies.json` – schemă exemplu conformă (cu `list_endpoints`, `ad_endpoints`).
+3) `secrets.env` – variabile `OLX_EMAIL`, `OLX_PASSWORD`.
+4) `urls.txt` – seed-uri.
+5) `requirements.txt` – pin-uit (selenium, selenium-wire, pandas, openpyxl, python-dotenv).
+6) README.md – pași de instalare/rulare (Windows), opțiuni debug, parametri principali.
+
+Parametri & valori implicite
+- `HEADLESS=[[False]]`, `ASSISTED_LOGIN_TIMEOUT=90`, `SLEEP_BETWEEN_ADS=1.2` (random ±0.3), `MAX_PAGE_RETRIES=3`, `MAX_AD_RETRIES=3`,
+  `BACKOFF_BASE=1.0`, `BACKOFF_FACTOR=2.0`, `BACKOFF_JITTER=0.35`,
+  `MAX_PAGES_PER_SEED=[[None sau 1 pentru test]]`.
+
+Acceptanță (test plan)
+- Cu `urls.txt` ce conține [[LINK_LISTA]] și 2 anunțuri directe:
+  - rulează, face login o singură dată (sau autologin din cookies),
+  - `[LIST_PAGE] END OK` raportează `links`, `total`, `skipped` corect,
+  - `[AD] END OK | phones>=0`, iar la eșec se salvează `_debug/…`,
+  - creează `anunturi_[[NAMESPACE]]_YYYYMMDD-HHMMSS.(csv|xlsx|jsonl)`,
+  - codul este tipat și trece `py -m pip install -r requirements.txt` în Python 3.[[VERSION]].
+
+IMPORTANT
+- Explică în cod limitele anti-bot, cum folosim sticky UA fix pentru driverul logat, de ce păstrăm cookies pe disc și când pot apărea solicitări 2FA.
+- Fără log de nivel `DEBUG` de la dependențe; doar log nostru clar, etapizat.
+- Include utilities pentru normalizare și pentru parse total results.
+- Include fallback „mobile” și sniff XHR.

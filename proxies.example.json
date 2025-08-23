@@ -1,0 +1,9 @@
+﻿{
+  "verify_ssl": true,
+  "list_endpoints": [
+    { "protocol": "http", "host": "proxy.geonode.io", "port": 9000, "username": "YOUR_USERNAME", "password": "REDACTED" }
+  ],
+  "ad_endpoints": [
+    { "protocol": "http", "host": "proxy.geonode.io", "port": 10000, "username": "YOUR_STICKY_USERNAME", "password": "REDACTED" }
+  ]
+}
