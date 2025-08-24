@@ -1,4 +1,4 @@
-default_language_version:
+﻿default_language_version:
   python: python3.11
 
 repos:
@@ -22,3 +22,4 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
+
