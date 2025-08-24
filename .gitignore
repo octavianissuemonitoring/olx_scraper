@@ -1,32 +1,36 @@
-﻿__pycache__/
-*.pyc
+﻿# venv & cache
 .venv/
-.env
-*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
 .pytest_cache/
+.mypy_cache/
+.cache/
+
+# output & artefacte
+out/
+archive/
+debug/
+logs/
+*.log
+*.xlsx
+*.csv
+*.jsonl
+
+# ide/editor
 .vscode/
 .idea/
-*_debug/
-_debug/
-*.csv
-*.xlsx
-*.jsonl
-olx_cookies.json
-chromedriver.log
-secrets.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# docker
+*.local.yml
+
+# secrete (NU urca)
+credentials.env
 proxies.json
-# backups / fișiere temporare
-*_backup.py
-*backup*.py
-*.bak
-*.old
-*.orig
-*~
-archive/
-*_backup.py
-*backup*.py
-*.bak
-*.old
-*.orig
-*~
-proxies.json
+
+# backupuri vechi
+*.backup*.py
