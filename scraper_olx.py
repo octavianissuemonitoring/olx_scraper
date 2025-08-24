@@ -1,71 +1,185 @@
-from __future__ import annotations
+﻿from uuid import uuid4
 
+"""
+OLX scraper (Selenium 4, fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢rÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ selenium-wire)
+- Login cu salvare/ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢rcare cookie-uri (o singurÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ autentificare per sesiune)
+- Progres clar [curent/total]
+- Extragere cÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢mpuri suplimentare: ad_id, user_id, locality (prin JSONÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“LD ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ meta ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ DOM fallback)
+- Salvare imediatÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ dupÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ FIECARE paginÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢: CSV (ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢i opÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºional JSONL), cu flush
+- Compatibil cu structura ta (seed-uri din urls.txt, proxies.json, secrets.env)
+
+Rulare (PowerShell):
+
+  $env:OLX_EMAIL = "emailul_tau@exemplu.ro"
+  $env:OLX_PASSWORD = "parola_ta"
+  python .\\scraper_olx.py
+
+DependenÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºe: selenium>=4.20, beautifulsoup4, pandas, python-dotenv, tqdm (opÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºional)
+  python -m pip install --upgrade "selenium>=4.20" beautifulsoup4 pandas python-dotenv tqdm
+"""
 import csv
 import json
 import logging
 import os
+import platform
 import random
 import re
+import socket
 import subprocess
+import sys
 import time
 import unicodedata
-
-# --- suprimÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ warning-ul "pkg_resources is deprecated as an API" din dependenÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºe ---
-import warnings
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import pandas as pd
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException
+from selenium import webdriver
+from selenium.common.exceptions import WebDriverException  # <-- nou
+from selenium.common.exceptions import (
+    ElementClickInterceptedException,
+    ElementNotInteractableException,
+    InvalidSessionIdException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from seleniumwire import webdriver as wire_webdriver
 
-warnings.filterwarnings("ignore", category=UserWarning, message=r"pkg_resources is deprecated as an API.*")
+try:
+    from tqdm import tqdm
+except Exception:
+
+    def tqdm(iterable, total=None):
+        return iterable
 
 
-# ========= LOGGING minimalist =========
+# ========= LOGGING =========
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-7s | %(message)s",
     datefmt="%H:%M:%S",
 )
 log = logging.getLogger("olx")
-# reduc zgomotul din dependency
-logging.getLogger("seleniumwire").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
 def log_stage(stage: str, status: str, details: str = ""):
-    """Helper pentru a marca clar etapele ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n CMD."""
     msg = f"[{stage}] {status}"
     if details:
         msg += f" | {details}"
     log.info(msg)
 
 
-# ========= CONFIG UÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“OR =========
-HEADLESS = False
+# ========= RUN LOGGING (run-id, files per run + all.log) =========
+
+RUN_ID = None
+RUN_START_TS = None
+RUN_LOG_PATH = None
+
+
+def init_run_logging():
+    """ConfigureazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ logging-ul: consolÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ + logs/all.log (zilnic) + logs/runs/run-<RUN_ID>.log"""
+    global RUN_ID, RUN_START_TS, RUN_LOG_PATH, log
+    RUN_START_TS = time.time()
+    ts = time.strftime("%Y%m%d-%H%M%S", time.gmtime())
+    RUN_ID = f"{ts}-{str(uuid4())[:8]}"
+
+    logs_dir = os.getenv("LOG_DIR", "logs")
+    os.makedirs(os.path.join(logs_dir, "runs"), exist_ok=True)
+
+    level = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper(), logging.INFO)
+    root = logging.getLogger()
+    for h in list(root.handlers):
+        root.removeHandler(h)
+    root.setLevel(level)
+
+    fmt = logging.Formatter("%(asctime)s | %(levelname)-7s | run=%(run_id)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+
+    ch = logging.StreamHandler()
+    ch.setLevel(level)
+    ch.setFormatter(fmt)
+    root.addHandler(ch)
+
+    from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
+
+    th = TimedRotatingFileHandler(
+        filename=os.path.join(logs_dir, "all.log"),
+        when="midnight",
+        backupCount=int(os.getenv("LOG_KEEP_DAYS", "60")),
+        encoding="utf-8",
+        utc=True,
+        delay=False,
+    )
+    th.setLevel(level)
+    th.setFormatter(fmt)
+    root.addHandler(th)
+
+    RUN_LOG_PATH = os.path.join(logs_dir, "runs", f"run-{RUN_ID}.log")
+    rh = RotatingFileHandler(
+        filename=RUN_LOG_PATH,
+        maxBytes=int(float(os.getenv("RUN_LOG_MAX_MB", "10")) * 1024 * 1024),
+        backupCount=int(os.getenv("RUN_LOG_BACKUPS", "3")),
+        encoding="utf-8",
+        delay=False,
+    )
+    rh.setLevel(level)
+    rh.setFormatter(fmt)
+    root.addHandler(rh)
+
+    logger = logging.getLogger("olx")
+    log = logging.LoggerAdapter(logger, {"run_id": RUN_ID})
+
+
+def finalize_run_index(extra: dict | None = None):
+    """Scrie indexul JSONL cu sumarul rularii curente."""
+    try:
+        if RUN_ID is None or RUN_START_TS is None:
+            return
+        end = time.time()
+        summary = {
+            "run_id": RUN_ID,
+            "start_ts": RUN_START_TS,
+            "end_ts": end,
+            "duration_s": round(end - RUN_START_TS, 3),
+            "ts_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(end)),
+            "output_prefix": OUTPUT_PREFIX,
+            "headless": bool(HEADLESS),
+            "host": socket.gethostname(),
+            "python": sys.version.split()[0],
+            "os": platform.platform(),
+            "run_log": RUN_LOG_PATH,
+        }
+        if isinstance(extra, dict):
+            summary.update(extra)
+        idx_path = os.path.join(os.getenv("LOG_DIR", "logs"), "runs", "index.jsonl")
+        os.makedirs(os.path.dirname(idx_path), exist_ok=True)
+        with open(idx_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(summary, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+# ========= CONFIG =========
+HEADLESS = True
 OUTPUT_PREFIX = "anunturi_autorulote"
 EXPORT_JSONL = True
-MAX_PAGES_PER_SEED = None  # pune 1 pentru test rapid; None = fÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ limitÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+MAX_PAGES_PER_SEED = None  # pune 1 pentru test; None = fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢rÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ limitÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢
 MAX_PAGE_RETRIES = 4
 MAX_AD_RETRIES = 3
 BACKOFF_BASE = 1.0
 BACKOFF_FACTOR = 2.0
 BACKOFF_JITTER = 0.35
 SLEEP_BETWEEN_ADS = 0.9
+JITTER = (
+    0.6,
+    1.3,
+)  # pauzÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ aleatoare ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntre anunÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºuri (secunde)
 ASSISTED_LOGIN_TIMEOUT = 90
-DEBUG_SNAPSHOTS = True  # pune False dupÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ce termini depanarea
-
-# login unic doar ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n driverul ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œADÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â
+DEBUG_SNAPSHOTS = False
 COOKIES_FILE = "olx_cookies.json"
 
 # UA & viewport
@@ -95,18 +209,31 @@ FIXED_AD_UA = {
     "platform": "Win32",
 }
 
-# regex
+# ========= RUN STATS (contorizÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ri pentru index) =========
+STATS = {
+    "links_total": 0,
+    "seen_skip": 0,
+    "ads_attempted": 0,
+    "ads_saved": 0,
+    "phones_found": 0,
+    "errors": 0,
+}
+
+
+def stat_inc(key: str, delta: int = 1) -> None:
+    try:
+        STATS[key] = STATS.get(key, 0) + int(delta)
+    except Exception:
+        pass
+
+
 PHONE_RE = re.compile(
-    r"(?:\+?4?0\s*7[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})" r"|(?:07[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})"
+    r"(?:\+?4?0\s*7[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})|(?:07[\s\-.]?\d{2}[\s\-.]?\d{3}[\s\-.]?\d{3})"
 )
 RE_ID = re.compile(r"\bID(?:-ul)?(?:\s*anuntului)?\s*[:#]?\s*(\d+)\b", re.IGNORECASE)
 RE_VIEWS = re.compile(r"\bVizualizari\s*[:#]?\s*([\d\s\.]+)", re.IGNORECASE)
-# Permite: "Garantie (RON): 5 000", "Garantie: 5 000 RON", "garantie- 5000 Lei", etc.
-# Logica: dupÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ cuv. "Garantie", acceptÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ pÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢nÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ la 40 de caractere non-cifrÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ (paranteze/colon/spaÃƒÆ’Ã‹â€ ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºii),
-# apoi CAPTUREAZÃƒÆ’Ã¢â‚¬Å¾ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ un numÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢r care ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â®ncepe cu cel puÃƒÆ’Ã‹â€ ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºin o cifrÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢, urmatÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ de cifre/spaÃƒÆ’Ã‹â€ ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºii/puncte,
-# ÃƒÆ’Ã‹â€ ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢i opÃƒÆ’Ã‹â€ ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âºional moneda dupÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ (RON/Lei/EUR/ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬).
 RE_GARANTIE = re.compile(
-    r"\bGarantie\b[^\d]{0,40}(\d[\d\s\.]*)(?:\s*(?:RON|Lei|EUR|ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬))?",
+    r"\bGarantie\b[^\d]{0,40}(\d[\d\s\.]*)(?:\s*(?:RON|Lei|EUR|ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬))?",
     re.IGNORECASE,
 )
 
@@ -130,7 +257,9 @@ class ProxyPools:
 
 def read_urls(path="urls.txt") -> List[str]:
     if not os.path.exists(path):
-        raise FileNotFoundError("LipseÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢te urls.txt")
+        raise FileNotFoundError(
+            "LipseÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢te urls.txt"
+        )
     with open(path, "r", encoding="utf-8") as f:
         urls = [ln.strip() for ln in f if ln.strip() and not ln.startswith("#")]
     if not urls:
@@ -167,6 +296,8 @@ def load_secrets(path="secrets.env") -> Tuple[str, str]:
 
 
 # ========= HELPERI =========
+
+
 def pick_ua() -> dict:
     return random.choice(UA_POOL)
 
@@ -190,23 +321,32 @@ def strip_diacritics(text: str) -> str:
 def parse_price(raw: str) -> Tuple[str, str]:
     if not raw:
         return "", ""
-    m = re.search(r"([\d\.\s]+)\s*([ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬EeUuRrOo]|RON|Lei|LEI)?", raw)
+    m = re.search(
+        r"([\d\.\s]+)\s*(RON|Lei|LEI|EUR|ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬)?",
+        raw,
+        re.IGNORECASE,
+    )
     if not m:
         return "", ""
     val = re.sub(r"[^\d]", "", m.group(1) or "").strip()
-    cur = (m.group(2) or "").upper().replace("LEI", "RON").replace("EURO", "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬")
-    if cur in ["E", "EURO"]:
-        cur = "ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬"
+    cur = (
+        (m.group(2) or "")
+        .upper()
+        .replace("LEI", "RON")
+        .replace("EURO", "EUR")
+        .replace(
+            "ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬",
+            "EUR",
+        )
+    )
     return val, cur or ""
 
 
 def parse_total_results(driver) -> Optional[int]:
-    """CiteÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢te 'Am gÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢sit X rezultate' din header, dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ existÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢."""
-    # cautÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ o frazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ cu 'Am gÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢sit' + 'rezultate'
     try:
         el = driver.find_element(
             By.XPATH,
-            "//*[contains(., 'Am gÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢sit') and contains(., 'rezultat')]",
+            "//*[contains(., 'Am gÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢sit') and contains(., 'rezultat')]",
         )
         txt = el.text.replace(".", "")
         m = re.search(r"(\d+)", txt)
@@ -218,19 +358,10 @@ def parse_total_results(driver) -> Optional[int]:
 
 
 def normalize_url(href: str) -> str:
-    """NormalizeazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ URL-ul: eliminÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ fragmentul ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i parametri de tracking care dubleazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ linkuri."""
     try:
         href = href.split("#", 1)[0]
         s = urlsplit(href)
-        # scoatem parametri evidenÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºi de tracking
-        drop = {
-            "reason",
-            "utm_source",
-            "utm_medium",
-            "utm_campaign",
-            "utm_term",
-            "utm_content",
-        }
+        drop = {"reason", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"}
         qs = [(k, v) for k, v in parse_qsl(s.query, keep_blank_values=True) if k.lower() not in drop]
         return urlunsplit((s.scheme, s.netloc, s.path, urlencode(qs, doseq=True), ""))
     except Exception:
@@ -239,7 +370,6 @@ def normalize_url(href: str) -> str:
 
 def clean_phone(s: str) -> str:
     digits = re.sub(r"\D", "", s or "")
-    # +40 7xx xxx xxx -> 07xxxxxxxx
     if digits.startswith("40") and len(digits) == 11 and digits[2] == "7":
         digits = "0" + digits[2:]
     if digits.startswith("7") and len(digits) == 9:
@@ -255,55 +385,20 @@ def _ensure_dir(p: str) -> None:
 
 
 def debug_dump(ad_driver, url: str, tag: str = "no_phone") -> None:
-    """SalveazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ screenshot, HTML ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i ultimele XHR-uri utile ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntr-un subfolder _debug/."""
     if not DEBUG_SNAPSHOTS:
         return
     ts = time.strftime("%Y%m%d-%H%M%S")
     base = os.path.join("_debug", f"{tag}_{ts}")
     _ensure_dir(base)
-    # screenshot
     try:
         ad_driver.save_screenshot(os.path.join(base, "page.png"))
     except Exception:
         pass
-    # html
     try:
         html = ad_driver.page_source
         open(os.path.join(base, "page.html"), "w", encoding="utf-8").write(html)
     except Exception:
         pass
-    # requests (din selenium-wire)
-    try:
-        reqs = ad_driver.requests[-120:] if hasattr(ad_driver, "requests") else []
-        out = []
-        for r in reqs:
-            try:
-                status = r.response.status_code if r.response else None
-                ctype = (r.response.headers.get("Content-Type", "") if r.response else "") or ""
-                if not any(k in ctype.lower() for k in ("json", "text", "html")):
-                    continue
-                body = r.response.body
-                if isinstance(body, bytes):
-                    try:
-                        body = body.decode("utf-8", "ignore")
-                    except Exception:
-                        continue
-                out.append(
-                    {
-                        "url": r.url,
-                        "status": status,
-                        "content_type": ctype,
-                        "snippet": body[:2000] if body else "",
-                    }
-                )
-            except Exception:
-                continue
-        open(os.path.join(base, "network.json"), "w", encoding="utf-8").write(
-            json.dumps(out, ensure_ascii=False, indent=2)
-        )
-    except Exception:
-        pass
-    # mic index
     try:
         open(os.path.join(base, "README.txt"), "w", encoding="utf-8").write(f"URL: {url}\nTimestamp: {ts}\n")
     except Exception:
@@ -328,103 +423,7 @@ def _safe_click(driver, el) -> bool:
         return False
 
 
-def _phones_from_dom(driver) -> List[str]:
-    phones = set()
-    # 1) linkuri tel:
-    try:
-        for a in driver.find_elements(By.CSS_SELECTOR, "a[href^='tel:']"):
-            href = a.get_attribute("href") or ""
-            if href.lower().startswith("tel:"):
-                ph = clean_phone(href.split(":", 1)[1])
-                if ph:
-                    phones.add(ph)
-    except Exception:
-        pass
-    # 2) body text
-    try:
-        body = driver.find_element(By.TAG_NAME, "body").text
-        for m in PHONE_RE.findall(body):
-            m = m if isinstance(m, str) else next(filter(None, m), "")
-            if m:
-                ph = clean_phone(m)
-                if ph:
-                    phones.add(ph)
-    except Exception:
-        pass
-    return [p for p in phones if p.startswith("07") and len(p) == 10]
-
-
-def _phones_from_network(driver, tail: int = 120) -> List[str]:
-    """CautÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n ultimele rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢spunsuri XHR texte care conÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºin numere (JSON/text)."""
-    phones = set()
-    try:
-        reqs = driver.requests[-tail:] if hasattr(driver, "requests") else []
-    except Exception:
-        reqs = []
-    for req in reversed(reqs):
-        try:
-            if not req.response:
-                continue
-            ctype = (req.response.headers.get("Content-Type", "") or "").lower()
-            if not any(k in ctype for k in ("json", "text", "html")):
-                continue
-            body = req.response.body
-            if isinstance(body, bytes):
-                try:
-                    body = body.decode("utf-8", "ignore")
-                except Exception:
-                    continue
-            if not body:
-                continue
-            for m in PHONE_RE.findall(body):
-                m = m if isinstance(m, str) else next(filter(None, m), "")
-                if m:
-                    ph = clean_phone(m)
-                    if ph.startswith("07") and len(ph) == 10:
-                        phones.add(ph)
-        except Exception:
-            continue
-    return sorted(phones)
-
-
-SHOW_PHONE_SELECTORS: List[Tuple[str, str]] = [
-    # OLX varianta nouÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
-    (By.CSS_SELECTOR, "[data-testid='show-phone-number']"),
-    (By.CSS_SELECTOR, "[data-cy='ad-contact-phone']"),
-    # butoane generice cu text
-    (
-        By.XPATH,
-        "//button[contains(., 'AratÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢') or contains(., 'Arata') or contains(., 'Show')]",
-    ),
-    (
-        By.XPATH,
-        "//*[self::button or self::a][.//span[contains(.,'Telefon')] or contains(.,'Telefon')]",
-    ),
-    # fallback: linkuri tel:
-    (By.CSS_SELECTOR, "a[href^='tel:']"),
-]
-
-
-def build_wire_options(ep: Optional[ProxyEndpoint], verify_ssl: bool) -> Optional[dict]:
-    if not ep:
-        return None
-    auth = f"{ep.username}:{ep.password}@" if (ep.username or ep.password) else ""
-    if ep.protocol.lower() == "http":
-        proxy = {
-            "http": f"http://{auth}{ep.host}:{ep.port}",
-            "https": f"https://{auth}{ep.host}:{ep.port}",
-        }
-    elif ep.protocol.lower() == "socks5":
-        proxy = {
-            "http": f"socks5://{auth}{ep.host}:{ep.port}",
-            "https": f"socks5://{auth}{ep.host}:{ep.port}",
-        }
-    else:
-        raise ValueError(f"Protocol necunoscut: {ep.protocol}")
-    out = {"proxy": proxy}
-    if not verify_ssl:
-        out["verify_ssl"] = False
-    return out
+# ========= SELENIUM fÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢rÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ selenium-wire =========
 
 
 def apply_stealth(driver, ua: dict) -> None:
@@ -455,31 +454,43 @@ def make_driver(ep: Optional[ProxyEndpoint], verify_ssl: bool, ua: Optional[dict
     opts.add_argument("--disable-blink-features=AutomationControlled")
     opts.add_argument(f"--lang={ua['lang']}")
     opts.add_argument(f"--user-agent={ua['ua']}")
-    # suprimÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m logurile ChromeDriver/DevTools
     opts.add_experimental_option("excludeSwitches", ["enable-logging", "enable-automation"])
     opts.add_argument("--log-level=3")
+
+    # forÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚ÂºeazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ conexiune directÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ (ignorÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ proxy-uri OS/PAC)
+    opts.add_argument("--proxy-server=direct://")
+    opts.add_argument("--proxy-bypass-list=*")
+
+    # proxy upstream (dacÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ e definit)
+    if ep:
+        auth = f"{ep.username}:{ep.password}@" if (ep.username or ep.password) else ""
+        if ep.protocol.lower() == "http":
+            proxy_arg = f"http://{auth}{ep.host}:{ep.port}"
+        elif ep.protocol.lower() == "socks5":
+            proxy_arg = f"socks5://{auth}{ep.host}:{ep.port}"
+        else:
+            raise ValueError(f"Protocol necunoscut: {ep.protocol}")
+        opts.add_argument(f"--proxy-server={proxy_arg}")
+        # notÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢: verify_ssl nu se aplicÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ direct ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n Chrome; ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®l lÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢sÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢m pentru viitor
+
     service = Service(log_output=subprocess.DEVNULL)
-
-    # selenium-wire options + decomprimare body XHR (disable_encoding)
-    sw = build_wire_options(ep, verify_ssl) if ep else {}
-    if sw is None:
-        sw = {}
-    sw["disable_encoding"] = (
-        True  # important pentru a citi uÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢or response.body
-    )
-
-    d = wire_webdriver.Chrome(seleniumwire_options=sw, options=opts, service=service)
+    d = webdriver.Chrome(options=opts, service=service)
+    d.set_page_load_timeout(60)
+    d.set_script_timeout(60)
+    d.implicitly_wait(2)
     apply_stealth(d, ua)
     return d
 
 
 # ========= UI helpers =========
+
+
 def accept_cookies_if_any(driver) -> None:
     cands = [
         (By.CSS_SELECTOR, "[data-testid='cookies-popup-accept-all']"),
         (
             By.XPATH,
-            "//button[contains(., 'AcceptÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ toate') or contains(., 'Accepta toate') or contains(., 'Accept all')]",
+            "//button[contains(., 'AcceptÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ toate') or contains(., 'Accepta toate') or contains(., 'Accept all')]",
         ),
     ]
     for by, sel in cands:
@@ -506,12 +517,18 @@ def is_logged_in(driver) -> bool:
     return False
 
 
-# ========= COOKIES persistente (un singur login) =========
+# ========= COOKIES persistente =========
+
+
 def save_cookies(driver, path=COOKIES_FILE) -> None:
     try:
         cookies = driver.get_cookies()
         json.dump(cookies, open(path, "w", encoding="utf-8"))
-        log_stage("LOGIN", "INFO", f"cookies salvate ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n {path}")
+        log_stage(
+            "LOGIN",
+            "INFO",
+            f"cookies salvate ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n {path}",
+        )
     except Exception as e:
         log_stage("LOGIN", "INFO", f"nu am putut salva cookies: {e}")
 
@@ -532,101 +549,111 @@ def load_cookies(driver, base="https://www.olx.ro/", path=COOKIES_FILE) -> bool:
         log_stage(
             "LOGIN",
             "INFO",
-            f"nu am putut ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rca cookies: {e}",
+            f"nu am putut ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢rca cookies: {e}",
         )
         return False
 
 
-def ensure_single_login(ad_driver, email: str, password: str) -> None:
-    log_stage("LOGIN", "STARTING")
-    # 1) ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ din cookies
-    if load_cookies(ad_driver):
-        if is_logged_in(ad_driver):
+def ensure_single_login(ad_driver, email: str, password: str) -> webdriver.Chrome:
+
+    def _rebuild():
+        log_stage(
+            "LOGIN", "INFO", "recreez driver (sesiune invalidÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢)"
+        )
+        try:
+            ad_driver.quit()
+        except Exception:
+            pass
+        # refacem driverul fÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ proxy (direct), cu UA fix pentru anunÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºuri
+        return make_driver(ep=None, verify_ssl=True, ua=FIXED_AD_UA)
+
+    # 1) ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ autologin din cookies
+    try:
+        if load_cookies(ad_driver) and is_logged_in(ad_driver):
             log_stage("LOGIN", "END OK", "autologin din cookies")
-            return
-    # 2) eÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ti deja logat?
-    ad_driver.get("https://www.olx.ro/")
+            return ad_driver
+    except InvalidSessionIdException:
+        ad_driver = _rebuild()
+
+    # 2) mergi la homepage
+    try:
+        ad_driver.get("https://www.olx.ro/")
+    except InvalidSessionIdException:
+        ad_driver = _rebuild()
+        ad_driver.get("https://www.olx.ro/")
+
     accept_cookies_if_any(ad_driver)
     if is_logged_in(ad_driver):
         save_cookies(ad_driver)
         log_stage("LOGIN", "END OK", "deja logat")
-        return
+        return ad_driver
 
-    # 3) login automat cu email/parolÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+    # 3) login automat cu user/pass (dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ sunt setate)
     if email and password:
         try:
-            ad_driver.get("https://www.olx.ro/cont/")
-            accept_cookies_if_any(ad_driver)
-            time.sleep(1)
-            email_sel = [
-                (By.CSS_SELECTOR, "input[type='email']"),
-                (By.CSS_SELECTOR, "input[name='email']"),
-                (By.CSS_SELECTOR, "input[name='username']"),
-                (
-                    By.XPATH,
-                    "//input[contains(@placeholder,'Email') or contains(@placeholder,'Telefon')]",
-                ),
-            ]
-            pwd_sel = [
-                (By.CSS_SELECTOR, "input[type='password']"),
-                (By.CSS_SELECTOR, "input[name='password']"),
-                (
-                    By.XPATH,
-                    "//input[contains(@placeholder,'Parol') or contains(@placeholder,'password')]",
-                ),
-            ]
-            email_box = None
-            for by, sel in email_sel:
-                try:
-                    email_box = WebDriverWait(ad_driver, 6).until(EC.presence_of_element_located((by, sel)))
-                    break
-                except Exception:
-                    pass
-            if email_box:
-                email_box.clear()
-                email_box.send_keys(email)
-                time.sleep(0.2)
-            pwd_box = None
-            for by, sel in pwd_sel:
-                try:
-                    pwd_box = ad_driver.find_element(by, sel)
-                    break
-                except Exception:
-                    pass
-            if pwd_box:
-                pwd_box.clear()
-                pwd_box.send_keys(password)
-                time.sleep(0.2)
-                pwd_box.send_keys(Keys.ENTER)
+            try:
+                ad_driver.get("https://www.olx.ro/cont/")
+            except InvalidSessionIdException:
+                ad_driver = _rebuild()
+                ad_driver.get("https://www.olx.ro/cont/")
 
-            for _ in range(20):
-                if is_logged_in(ad_driver):
-                    save_cookies(ad_driver)
-                    log_stage("LOGIN", "END OK", "auto")
-                    return
-                time.sleep(1)
+            accept_cookies_if_any(ad_driver)
+            WebDriverWait(ad_driver, 20).until(
+                EC.presence_of_element_located(
+                    (By.CSS_SELECTOR, "input[type='email'],input[name='email'],input[name='username']")
+                )
+            ).send_keys(email)
+
+            ad_driver.find_element(By.CSS_SELECTOR, "button[type='submit'],button[data-testid*='next']").click()
+            WebDriverWait(ad_driver, 20).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='password'],input[name='password']"))
+            ).send_keys(password)
+            ad_driver.find_element(By.CSS_SELECTOR, "button[type='submit'],button[data-testid*='login']").click()
+
+            WebDriverWait(ad_driver, 30).until(lambda d: is_logged_in(d))
+            save_cookies(ad_driver)
+            log_stage("LOGIN", "END OK", "auto")
+            return ad_driver
+        except InvalidSessionIdException:
+            ad_driver = _rebuild()
         except Exception:
             pass
 
-    # 4) login asistat (o singurÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ datÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢)
-    ad_driver.get("https://www.olx.ro/cont/")
+    # 4) login asistat (manual)
+    try:
+        ad_driver.get("https://www.olx.ro/cont/")
+    except InvalidSessionIdException:
+        ad_driver = _rebuild()
+        ad_driver.get("https://www.olx.ro/cont/")
+
     accept_cookies_if_any(ad_driver)
     log_stage(
         "LOGIN",
         "EXECUTING",
-        f"manual, ai ~{ASSISTED_LOGIN_TIMEOUT}s ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n fereastrÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢",
+        f"manual, ai ~{ASSISTED_LOGIN_TIMEOUT}s ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n fereastrÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢",
     )
     t0 = time.time()
     while time.time() - t0 < ASSISTED_LOGIN_TIMEOUT:
-        if is_logged_in(ad_driver):
-            save_cookies(ad_driver)
-            log_stage("LOGIN", "END OK", "manual")
-            return
+        try:
+            if is_logged_in(ad_driver):
+                save_cookies(ad_driver)
+                log_stage("LOGIN", "END OK", "manual")
+                return ad_driver
+        except InvalidSessionIdException:
+            ad_driver = _rebuild()
+            try:
+                ad_driver.get("https://www.olx.ro/cont/")
+            except InvalidSessionIdException:
+                ad_driver = _rebuild()
         time.sleep(1.5)
+
     log_stage("LOGIN", "END FAIL", "nu s-a finalizat autentificarea")
+    return ad_driver
 
 
-# ========= LISTÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ & ANUNÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ =========
+# ========= LISTÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ & ANUNÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ =========
+
+
 def wait_for_list(driver) -> None:
     try:
         WebDriverWait(driver, 12).until(
@@ -635,7 +662,7 @@ def wait_for_list(driver) -> None:
                 EC.presence_of_element_located(
                     (
                         By.XPATH,
-                        "//*[contains(., 'Nu am gÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢sit anunÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºuri') or contains(., 'No results')]",
+                        "//*[contains(., 'Nu am gÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢sit anunÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºuri') or contains(., 'No results') ]",
                     )
                 ),
             )
@@ -645,16 +672,9 @@ def wait_for_list(driver) -> None:
 
 
 def collect_links(driver) -> Tuple[List[Tuple[str, str]], Dict[str, int]]:
-    """
-    ReturneazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢: (links_olx, stats)
-      links_olx: listÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ de (title, href_normalizat) DOAR pentru /d/oferta/
-      stats: contorizÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ri pentru ce-am ignorat (autovit, intern-other)
-    """
     stats = {"olx": 0, "autovit": 0, "other_internal": 0}
     out: List[Tuple[str, str]] = []
     seen = set()
-
-    # deruleazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ un pic pentru a forÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºa ataÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢area lazy (de cÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢teva ori)
     try:
         for _ in range(5):
             driver.execute_script("window.scrollBy(0, Math.floor(document.body.scrollHeight/5));")
@@ -662,8 +682,6 @@ def collect_links(driver) -> Tuple[List[Tuple[str, str]], Dict[str, int]]:
     except Exception:
         pass
     time.sleep(0.2)
-
-    # 1) ia toate cardurile cunoscute; 2) fallback: toate ancorele din paginÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
     anchors = []
     cards = driver.find_elements(By.CSS_SELECTOR, "[data-cy='l-card'], article")
     for c in cards:
@@ -673,13 +691,11 @@ def collect_links(driver) -> Tuple[List[Tuple[str, str]], Dict[str, int]]:
             pass
     if not anchors:
         anchors = driver.find_elements(By.CSS_SELECTOR, "a[href]")
-
     for a in anchors:
         href = a.get_attribute("href") or ""
         if not href:
             continue
         txt = (a.text or "").strip()
-
         if "/d/oferta/" in href:
             url = normalize_url(href)
             if url not in seen:
@@ -689,9 +705,7 @@ def collect_links(driver) -> Tuple[List[Tuple[str, str]], Dict[str, int]]:
         elif "autovit.ro" in href:
             stats["autovit"] += 1
         elif href.startswith("https://www.olx.ro"):
-            # alte pagini interne (ex. /store/, /profile/, /help/). Le contorizÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m pentru diagnozÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢.
             stats["other_internal"] += 1
-
     return out, stats
 
 
@@ -707,16 +721,113 @@ def first_text(driver, sels: List[Tuple[str, str]]) -> str:
     return ""
 
 
+# --- Identificatori suplimentari (ad_id, user_id, locality) ---
+
+
+def extract_identifiers_from_html(html: str, page_url: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    soup = BeautifulSoup(html, "html.parser")
+    ad_id = user_id = locality = None
+
+    # 1) JSON-LD
+    for tag in soup.find_all("script", {"type": "application/ld+json"}):
+        data = None
+        try:
+            data = json.loads(tag.string or tag.text or "")
+        except Exception:
+            continue
+        items = data if isinstance(data, list) else [data]
+        for obj in items:
+            if not isinstance(obj, dict):
+                continue
+            ad_id = ad_id or obj.get("sku")
+            ident = obj.get("identifier")
+            if not ad_id and isinstance(ident, dict):
+                ad_id = ident.get("value") or ident.get("@id") or ident.get("id")
+            if not ad_id and isinstance(ident, list):
+                for it in ident:
+                    if isinstance(it, dict):
+                        cand = it.get("value") or it.get("@id") or it.get("id")
+                        if isinstance(cand, str) and cand.strip():
+                            ad_id = cand
+                            break
+            if not ad_id:
+                for key in ("@id", "id", "url"):
+                    v = obj.get(key)
+                    if isinstance(v, str):
+                        m = re.search(r"(\d{5,})", v)
+                        if m:
+                            ad_id = m.group(1)
+                            break
+            for who in ("seller", "author", "publisher"):
+                w = obj.get(who)
+                if isinstance(w, dict):
+                    cand = w.get("@id") or w.get("id") or w.get("identifier")
+                    if isinstance(cand, dict):
+                        cand = cand.get("value") or cand.get("@id") or cand.get("id")
+                    if isinstance(cand, str):
+                        m = re.search(r"(\d{4,})", cand)
+                        user_id = m.group(1) if m else cand
+                elif isinstance(w, list):
+                    for ww in w:
+                        if isinstance(ww, dict):
+                            cand = ww.get("@id") or ww.get("id") or ww.get("identifier")
+                            if isinstance(cand, dict):
+                                cand = cand.get("value") or cand.get("@id") or cand.get("id")
+                            if isinstance(cand, str) and cand.strip():
+                                m = re.search(r"(\d{4,})", cand)
+                                user_id = m.group(1) if m else cand
+                                break
+                if user_id:
+                    break
+            addr = obj.get("address")
+            if isinstance(addr, dict):
+                locality = locality or addr.get("addressLocality") or addr.get("addressRegion")
+            elif isinstance(addr, str):
+                locality = locality or addr
+    # 2) meta/URL
+    if not ad_id:
+        for name in ("product:retailer_item_id", "al:android:url", "al:ios:url", "og:url", "twitter:url"):
+            tag = soup.find("meta", {"property": name}) or soup.find("meta", {"name": name})
+            if tag and tag.get("content"):
+                m = re.search(r"(\d{5,})", tag["content"]) or re.search(r"ID[\w-]+", tag["content"], re.I)
+                if m:
+                    ad_id = m.group(0)
+    if not ad_id:
+        m = re.search(r"(\d{5,})", page_url) or re.search(r"ID[\w-]+", page_url, re.I)
+        if m:
+            ad_id = m.group(0)
+    # user_id din profil
+    if not user_id:
+        a = soup.select_one("a[data-testid='user-profile-link'][href]")
+        if a:
+            href = a.get("href", "")
+            m = re.search(r"user(?:id)?=([\w-]+)", href, re.I)
+            if m:
+                user_id = m.group(1)
+            else:
+                segs = [s for s in href.split("/") if s]
+                if segs:
+                    user_id = segs[-1]
+    # locality DOM
+    if not locality:
+        cand = soup.select_one("[data-testid='location']") or soup.select_one("[data-testid='location-text']")
+        if cand:
+            locality = cand.get_text(strip=True)
+    if locality and "," in locality:
+        locality = locality.split(",")[0].strip()
+    return (ad_id or None), (user_id or None), (locality or None)
+
+
+# --- cÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢mpuri paginÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ anunÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âº ---
+
+
 def extract_fields(driver) -> Dict[str, str]:
     titlu = first_text(
         driver,
         [
             (By.CSS_SELECTOR, "[data-cy='offer_title'] h1, [data-cy='offer_title'] h4"),
             (By.CSS_SELECTOR, "h1[data-cy='ad_title']"),
-            (
-                By.CSS_SELECTOR,
-                "[data-testid='offer_title'] h1, [data-testid='offer_title'] h4",
-            ),
+            (By.CSS_SELECTOR, "[data-testid='offer_title'] h1, [data-testid='offer_title'] h4"),
         ],
     )
     pret = first_text(
@@ -725,7 +836,7 @@ def extract_fields(driver) -> Dict[str, str]:
             (By.CSS_SELECTOR, "[data-testid='ad-price-container']"),
             (
                 By.XPATH,
-                "//*[self::h3 or self::h2][contains(., 'ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬') or contains(., 'Lei') or contains(., 'RON')]",
+                "//*[self::h3 or self::h2][contains(., 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬') or contains(., 'Lei') or contains(., 'RON')]",
             ),
         ],
     )
@@ -735,9 +846,8 @@ def extract_fields(driver) -> Dict[str, str]:
             (By.CSS_SELECTOR, "[data-testid='user-type']"),
             (
                 By.XPATH,
-                "//p[contains(., 'Persoana') or contains(., 'PersoanÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢') or contains(., 'Firm')]",
+                "//p[contains(., 'Persoana') or contains(., 'PersoanÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢') or contains(., 'Firm')]",
             ),
-            (By.CSS_SELECTOR, "p.css-5l1a1j span"),
         ],
     )
     vanzator = first_text(
@@ -764,18 +874,12 @@ def extract_fields(driver) -> Dict[str, str]:
         body = ""
     norm = strip_diacritics(body)
 
-    garantie = ""
-    m = RE_GARANTIE.search(norm)
-    if m:
-        garantie = sanitize_text(m.group(1))
-    id_anunt = ""
-    m = RE_ID.search(norm)
-    if m:
-        id_anunt = sanitize_text(m.group(1))
-    viz = ""
-    m = RE_VIEWS.search(norm)
-    if m:
-        viz = sanitize_text(m.group(1))
+    garantie = sanitize_text(RE_GARANTIE.search(norm).group(1)) if RE_GARANTIE.search(norm) else ""
+    id_anunt_text = sanitize_text(RE_ID.search(norm).group(1)) if RE_ID.search(norm) else ""
+    viz = sanitize_text(RE_VIEWS.search(norm).group(1)) if RE_VIEWS.search(norm) else ""
+
+    ad_id, user_id, locality = extract_identifiers_from_html(driver.page_source, driver.current_url)
+    id_final = ad_id or id_anunt_text
 
     return {
         "titlu": titlu,
@@ -785,34 +889,59 @@ def extract_fields(driver) -> Dict[str, str]:
         "persoana": persoana,
         "garantie": garantie,
         "descriere": descriere,
-        "id_anunt": id_anunt,
+        "id_anunt": id_final or "",
+        "user_id": user_id or "",
+        "localitate": locality or "",
         "vizualizari": viz,
         "vanzator": vanzator,
     }
 
 
+# --- telefon ---
+SHOW_PHONE_SELECTORS: List[Tuple[str, str]] = [
+    (By.CSS_SELECTOR, "[data-testid='show-phone-number']"),
+    (By.CSS_SELECTOR, "[data-cy='ad-contact-phone']"),
+    (
+        By.XPATH,
+        "//button[contains(., 'AratÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢') or contains(., 'Arata') or contains(., 'Show')]",
+    ),
+]
+
+
+def _phones_from_dom(driver) -> List[str]:
+    phones = set()
+    try:
+        for a in driver.find_elements(By.CSS_SELECTOR, "a[href^='tel:']"):
+            href = a.get_attribute("href") or ""
+            if href.lower().startswith("tel:"):
+                ph = clean_phone(href.split(":", 1)[1])
+                if ph:
+                    phones.add(ph)
+    except Exception:
+        pass
+    try:
+        body = driver.find_element(By.TAG_NAME, "body").text
+        for m in PHONE_RE.findall(body):
+            m = m if isinstance(m, str) else next(filter(None, m), "")
+            if m:
+                ph = clean_phone(m)
+                if ph:
+                    phones.add(ph)
+    except Exception:
+        pass
+    return [p for p in phones if p.startswith("07") and len(p) == 10]
+
+
 def reveal_phone_robust(driver) -> List[str]:
-    """
-    Strategie ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n lanÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âº:
-    1) scan DOM (inclusiv <a href="tel:">)
-    2) ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ toate butoanele ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¾AratÃƒÆ’Ã¢â‚¬Å¾Ãƒâ€ Ã¢â‚¬â„¢ telefonulÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â cu 3 tipuri de click
-    3) aÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢teaptÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ apariÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºia numÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rului ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n DOM
-    4) cautÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n XHR (selenium-wire) rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢spunsul care conÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºine numÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rul
-    5) fallback: deschide varianta mobilÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntr-un tab nou ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i citeÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢te <a href="tel:">
-    """
-    # 0) pre-scan DOM
     nums = _phones_from_dom(driver)
     if nums:
         return sorted(set(nums))
-
-    # 1) ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ de pÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢nÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ la 3 ori click pe diverse butoane
-    for round_idx in range(3):
+    for _ in range(3):
         try:
             driver.execute_script("window.scrollBy(0, 350);")
         except Exception:
             pass
         time.sleep(0.3)
-
         clicked = False
         for by, sel in SHOW_PHONE_SELECTORS:
             try:
@@ -822,24 +951,17 @@ def reveal_phone_robust(driver) -> List[str]:
                     time.sleep(0.15)
                     if _safe_click(driver, btn):
                         clicked = True
-                        time.sleep(1.5)  # dÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ timp UI-ului/ XHR-ului
-                        # dupÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ fiecare click, verificÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ rapid DOM
+                        time.sleep(1.5)
                         nums = _phones_from_dom(driver)
                         if nums:
                             return sorted(set(nums))
             except Exception:
                 continue
-
-        # 2) dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ am fÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢cut clic, dar ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ nu vedem numÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rul, ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ din XHR
         if clicked:
-            nums = _phones_from_network(driver, tail=160)
+            nums = _phones_from_dom(driver)
             if nums:
                 return sorted(set(nums))
-
-        # 3) ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n caz cÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ apare din nou bannerul de cookies
         accept_cookies_if_any(driver)
-
-    # 4) fallback: ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncearcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ varianta mobilÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntr-un tab separat
     try:
         cur = driver.current_url
         mobile_url = re.sub(r"^https?://(?:www\.)?olx\.ro", "https://m.olx.ro", cur, flags=re.I)
@@ -860,27 +982,24 @@ def reveal_phone_robust(driver) -> List[str]:
                 driver.switch_to.window(driver.window_handles[0])
         except Exception:
             pass
-
     return []
 
 
-# ========= RUNNERS (LIST fÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ login, AD cu login unic) =========
+# ========= RUNNERS =========
+
+
 def try_list_page(list_driver, url: str) -> List[Tuple[str, str]]:
     log_stage("LIST_PAGE", "STARTING", f"url={url}")
     try:
         list_driver.get(url)
         accept_cookies_if_any(list_driver)
         wait_for_list(list_driver)
-
         total = parse_total_results(list_driver)
         links, stats = collect_links(list_driver)
-
         msg = f"links={len(links)}"
         if total is not None:
             msg += f" | total={total}"
-        # arÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢tÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m ce-am sÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rit: autovit ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i alte interne
         msg += f" | skipped autovit={stats.get('autovit', 0)}, other={stats.get('other_internal', 0)}"
-
         log_stage("LIST_PAGE", "END OK", msg)
         return links
     except Exception as e:
@@ -901,15 +1020,21 @@ def try_ad_page(ad_driver, href: str) -> Tuple[Dict[str, str], List[str]]:
         if not phones:
             debug_dump(ad_driver, href, tag="no_phone")
 
-        log_stage("AD", "END OK", f"phones={len(phones)}")
+        log_stage(
+            "AD",
+            "END OK",
+            f"phones={len(phones)} | ad_id={fields.get('id_anunt')} | user_id={fields.get('user_id')} | loc={fields.get('localitate')}",
+        )
         return fields, phones
 
     except Exception as e:
         log_stage("AD", "END FAIL", str(e))
+        stat_inc("errors", 1)
         try:
             debug_dump(ad_driver, href, tag="ad_fail")
         except Exception:
             pass
+
         empty = {
             "titlu": "",
             "pret": "",
@@ -925,103 +1050,15 @@ def try_ad_page(ad_driver, href: str) -> Tuple[Dict[str, str], List[str]]:
         return empty, []
 
 
-# ========= MAIN =========
-def main():
-    # fiÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢iere externe
-    seeds = read_urls("urls.txt")
-    pools = load_proxies("proxies.json")
-    email, password = load_secrets("secrets.env")
-
-    # 1) ad_driver: STICKY RO (primul din ad_endpoints) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â login unic
-    ad_ep = pools.ad_endpoints[0] if pools.ad_endpoints else None
-    ad_driver = make_driver(ad_ep, pools.verify_ssl, ua=FIXED_AD_UA)
-    ensure_single_login(
-        ad_driver, email, password
-    )  # o singurÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ datÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
-
-    # 2) list_driver: ROTATING (primul din list_endpoints). DacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ gateway-ul e rotating, ajunge 1.
-    list_ep = pools.list_endpoints[0] if pools.list_endpoints else None
-    list_driver = make_driver(list_ep, pools.verify_ssl)
-
-    rows: List[Dict[str, str]] = []
-    seen = set()
-    visited = 0
-
-    try:
-        for seed in seeds:
-            page_idx = 1
-            while True:
-                if MAX_PAGES_PER_SEED and page_idx > MAX_PAGES_PER_SEED:
-                    break
-
-                url = seed if page_idx == 1 else f"{seed.rstrip('/')}/?page={page_idx}"
-
-                # === LIST PAGE (fÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ login) ===
-                links: List[Tuple[str, str]] = []
-                for attempt in range(1, MAX_PAGE_RETRIES + 1):
-                    log_stage(
-                        "LIST_PAGE",
-                        "EXECUTING",
-                        f"attempt={attempt}/{MAX_PAGE_RETRIES} | url={url}",
-                    )
-                    links = try_list_page(list_driver, url)
-                    if links:
-                        break
-                    exp_backoff(attempt)
-
-                if not links:
-                    # nimic pe pagina curentÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ -> trecem la urmÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢torul seed
-                    break
-
-                # === AD PAGES (cu driver autenticat, cookies persistente) ===
-                for _, href in links:
-                    fields: Dict[str, str]
-                    phones: List[str]
-                    for attempt in range(1, MAX_AD_RETRIES + 1):
-                        log_stage("AD", "EXECUTING", f"attempt={attempt}/{MAX_AD_RETRIES}")
-                        fields, phones = try_ad_page(ad_driver, href)
-                        if fields.get("titlu") or phones:
-                            break
-                        # dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ s-a dereglat driverul sticky, ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®l refacem ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m cookies
-                        try:
-                            ad_driver.quit()
-                        except Exception:
-                            pass
-                        ad_driver = make_driver(ad_ep, pools.verify_ssl, ua=FIXED_AD_UA)
-                        # reÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ncÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢rcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m cookies ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i verificÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢m cÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ suntem logaÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºi
-                        load_cookies(ad_driver)
-                        if not is_logged_in(ad_driver):
-                            ensure_single_login(ad_driver, email, password)
-                        exp_backoff(attempt)
-
-                    visited += 1
-
-                    if phones:
-                        for ph in phones:
-                            key = (ph, href)
-                            if key in seen:
-                                continue
-                            seen.add(key)
-                            rows.append({"telefon": ph, **fields, "url": href})
-                    else:
-                        key = ("", href)
-                        if key in seen:
-                            continue
-                        seen.add(key)
-                        rows.append({"telefon": "", **fields, "url": href})
-
-                    time.sleep(SLEEP_BETWEEN_ADS)
-
-                page_idx += 1
-
-        # === EXPORT ===
-        log_stage("EXPORT", "STARTING")
+class IncrementalWriters:
+    def __init__(self, prefix: str, enable_jsonl: bool = True):
         ts = time.strftime("%Y%m%d-%H%M%S")
-        csv_path = f"{OUTPUT_PREFIX}_{ts}.csv"
-        xlsx_path = f"{OUTPUT_PREFIX}_{ts}.xlsx"
-        jsonl_path = f"{OUTPUT_PREFIX}_{ts}.jsonl"
-
-        cols = [
+        self.csv_path = f"{prefix}_{ts}.csv"
+        self.jsonl_path = f"{prefix}_{ts}.jsonl" if enable_jsonl else None
+        self._csv_init = False
+        self._csv_fh = None
+        self._csv_writer = None
+        self.cols = [
             "telefon",
             "titlu",
             "pret",
@@ -1031,35 +1068,176 @@ def main():
             "garantie",
             "descriere",
             "id_anunt",
+            "user_id",
+            "localitate",
             "vizualizari",
             "vanzator",
             "url",
         ]
+        self.rows_cache: List[Dict[str, str]] = (
+            []
+        )  # pentru Excel la final (opÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºional)
 
-        with open(csv_path, "w", newline="", encoding="utf-8-sig") as f:
-            w = csv.DictWriter(f, fieldnames=cols)
-            w.writeheader()
-            w.writerows(rows)
+    def append(self, row: Dict[str, str]):
+        if not self._csv_init:
+            self._csv_fh = open(self.csv_path, "a", newline="", encoding="utf-8-sig")
+            self._csv_writer = csv.DictWriter(self._csv_fh, fieldnames=self.cols)
+            self._csv_writer.writeheader()
+            self._csv_init = True
+        self._csv_writer.writerow(row)
+        self._csv_fh.flush()
+        if self.jsonl_path:
+            with open(self.jsonl_path, "a", encoding="utf-8") as jf:
+                jf.write(json.dumps(row, ensure_ascii=False) + "\n")
+                jf.flush()
+        self.rows_cache.append(row)
 
-        pd.DataFrame(rows, columns=cols).to_excel(xlsx_path, index=False)
+    def close(self):
+        try:
+            if self._csv_fh:
+                self._csv_fh.close()
+        except Exception:
+            pass
 
-        if EXPORT_JSONL:
-            with open(jsonl_path, "w", encoding="utf-8") as f:
-                for r in rows:
-                    f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    def export_excel(self, xlsx_path: str):
+        try:
+            pd.DataFrame(self.rows_cache, columns=self.cols).to_excel(xlsx_path, index=False)
+        except Exception as e:
+            log.warning(f"Nu am putut scrie Excel: {e}")
 
-        found = sum(1 for r in rows if r.get("telefon"))
-        log_stage(
-            "EXPORT",
-            "END OK",
-            f"found={found} | ads_visited={visited} | CSV={csv_path}",
-        )
-        if EXPORT_JSONL:
-            log.info(f"JSONL: {jsonl_path}")
+
+# ========= RESUME: citeÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢te toate CSV-urile istorice ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i strÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢nge URL-urile deja procesate =========
+def load_seen_urls_from_history(prefix: str) -> set[str]:
+    seen = set()
+    try:
+        import glob
+
+        for path in glob.glob(f"{prefix}_*.csv"):
+            with open(path, "r", encoding="utf-8-sig", newline="") as f:
+                reader = csv.DictReader(f)
+                if not reader.fieldnames:
+                    continue
+                # cautÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ o coloanÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ 'url' (sau 'link'/'href'); dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ nu existÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢, ia ultima coloanÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+                low = [fn.strip().lower() for fn in reader.fieldnames]
+                url_key = None
+                for key in ("url", "link", "href"):
+                    if key in low:
+                        url_key = reader.fieldnames[low.index(key)]
+                        break
+                for row in reader:
+                    if url_key and row.get(url_key):
+                        seen.add(row[url_key].strip())
+                    elif row:  # fallback: ultima coloanÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+                        vals = list(row.values())
+                        if vals:
+                            seen.add(str(vals[-1]).strip())
+    except Exception:
+        pass
+    return seen
+
+
+# ========= MAIN =========
+
+
+def main():
+    init_run_logging()
+    log_stage("RUN", "START", f"id={RUN_ID}")
+    seeds = read_urls("urls.txt")
+    pools = load_proxies("proxies.json")
+    email, password = load_secrets("secrets.env")
+
+    # ad_driver: sticky (autentificat)
+    ad_ep = pools.ad_endpoints[0] if pools.ad_endpoints else None
+    ad_driver = make_driver(ad_ep, pools.verify_ssl, ua=FIXED_AD_UA)
+    ad_driver = ensure_single_login(ad_driver, email, password)
+    ad_driver = health_check_driver(ad_driver, name="AD", email=email, password=password)
+
+    # list_driver: poate folosi alt proxy (rotating)
+    list_ep = pools.list_endpoints[0] if pools.list_endpoints else None
+    list_driver = make_driver(list_ep, pools.verify_ssl)
+    list_driver = health_check_driver(list_driver, name="LIST")
+
+    writers = IncrementalWriters(OUTPUT_PREFIX, enable_jsonl=EXPORT_JSONL)
+    # resume: URL-uri colectate ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®n rulÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ri anterioare (din CSV-urile istorice)
+    seen_urls = load_seen_urls_from_history(OUTPUT_PREFIX)
+    seen = set()
+    visited = 0
+
+    try:
+        for seed in seeds:
+            page_idx = 1
+            while True:
+                if MAX_PAGES_PER_SEED and page_idx > MAX_PAGES_PER_SEED:
+                    break
+                url = seed if page_idx == 1 else f"{seed.rstrip('/')}/?page={page_idx}"
+                links: List[Tuple[str, str]] = []
+                for attempt in range(1, MAX_PAGE_RETRIES + 1):
+                    log_stage("LIST_PAGE", "EXECUTING", f"attempt={attempt}/{MAX_PAGE_RETRIES} | url={url}")
+                    links = try_list_page(list_driver, url)
+                    if links:
+                        break
+                    exp_backoff(attempt)
+                if not links:
+                    break
+
+                total = len(links)
+
+                stat_inc("links_total", total)
+                for idx, (_, href) in enumerate(links, start=1):
+                    # resume: dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ avem deja acest URL din istorice, sari
+                    if href in seen_urls:
+                        log_stage("AD", "SKIP", f"deja colectat | url={href}")
+
+                        stat_inc("seen_skip", 1)
+                        continue
+                    log_stage("AD", "EXECUTING", f"[{idx}/{total}] url={href}")
+                    fields: Dict[str, str]
+                    phones: List[str]
+                    stat_inc("ads_attempted", 1)
+                    for attempt in range(1, MAX_AD_RETRIES + 1):
+                        fields, phones = try_ad_page(ad_driver, href)
+                        if fields.get("titlu") or phones:
+                            break
+                        try:
+                            ad_driver.quit()
+                        except Exception:
+                            pass
+                        ad_driver = make_driver(ad_ep, pools.verify_ssl, ua=FIXED_AD_UA)
+                        load_cookies(ad_driver)
+                        if not is_logged_in(ad_driver):
+                            ensure_single_login(ad_driver, email, password)
+                        exp_backoff(attempt)
+                    visited += 1
+
+                    if phones:
+                        stat_inc("phones_found", 1)
+                        stat_inc("ads_saved", 1)
+                        seen_urls.add(href)
+
+                    else:
+                        key = ("", href)
+                        if key in seen:
+                            continue
+                        seen.add(key)
+                        writers.append({"telefon": "", **fields, "url": href})
+                        stat_inc("ads_saved", 1)
+                        seen_urls.add(href)
+
+                    time.sleep(random.uniform(*JITTER))
+                page_idx += 1
+
+        # === EXPORT FINAL ===
+        log_stage("EXPORT", "STARTING")
+        ts = time.strftime("%Y%m%d-%H%M%S")
+        xlsx_path = f"{OUTPUT_PREFIX}_{ts}.xlsx"
+        writers.export_excel(xlsx_path)
+        found = sum(1 for r in writers.rows_cache if r.get("telefon"))
+        log_stage("EXPORT", "END OK", f"found={found} | ads_visited={visited} | CSV={writers.csv_path}")
+        if writers.jsonl_path:
+            log.info(f"JSONL: {writers.jsonl_path}")
         log.info(f"XLSX : {xlsx_path}")
 
     finally:
-        # ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®nchidem driverele indiferent ce s-a ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢mplat
         try:
             list_driver.quit()
         except Exception:
@@ -1068,7 +1246,81 @@ def main():
             ad_driver.quit()
         except Exception:
             pass
+        writers.close()
+
+
+def health_check_driver(
+    drv, name: str, email: str | None = None, password: str | None = None, homepage: str = "https://www.olx.ro/"
+) -> webdriver.Chrome:
+    """VerificÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ starea driverului; dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ e invalid, ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®l recreeazÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢i ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®l aduce ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â®ntr-o stare bunÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢."""
+    log_stage("HEALTH", "STARTING", f"{name}")
+
+    def _rebuild(current):
+        log_stage("HEALTH", "REPAIR", f"{name} | recreez driver")
+        try:
+            current.quit()
+        except Exception:
+            pass
+        # AD -> UA fix; LIST -> UA random (None)
+        ua = FIXED_AD_UA if name.upper() == "AD" else None
+        new_drv = make_driver(ep=None, verify_ssl=True, ua=ua)
+        try:
+            load_cookies(new_drv)
+        except Exception:
+            pass
+        return new_drv
+
+    # 1) sesiune validÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢? + cel puÃƒÆ’Ã†â€™Ãƒâ€¹Ã¢â‚¬ ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âºin un tab
+    try:
+        handles = (
+            drv.window_handles
+        )  # aruncÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ dacÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ sesiunea e moartÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ÃƒÆ’Ã¢â‚¬ ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢
+    except (InvalidSessionIdException, WebDriverException, AttributeError):
+        drv = _rebuild(drv)
+        handles = drv.window_handles
+    try:
+        if not handles:
+            drv.execute_script("window.open('about:blank','_blank');")
+            drv.switch_to.window(drv.window_handles[-1])
+    except Exception:
+        pass
+
+    # 2) homepage + cookies
+    try:
+        cur = ""
+        try:
+            cur = drv.current_url
+        except Exception:
+            cur = ""
+        if not cur or cur in ("about:blank", "data:,"):
+            drv.get(homepage)
+        WebDriverWait(drv, 15).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        accept_cookies_if_any(drv)
+    except (InvalidSessionIdException, WebDriverException) as e:
+        log_stage("HEALTH", "REPAIR", f"{name} | reload homepage: {e}")
+        drv = _rebuild(drv)
+        drv.get(homepage)
+        WebDriverWait(drv, 15).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        accept_cookies_if_any(drv)
+
+    # 3) login pentru AD
+    try:
+        if name.upper() == "AD" and not is_logged_in(drv):
+            drv = ensure_single_login(drv, email or "", password or "")
+    except (InvalidSessionIdException, WebDriverException):
+        drv = ensure_single_login(_rebuild(drv), email or "", password or "")
+
+    log_stage("HEALTH", "END OK", f"{name} | url={drv.current_url}")
+    return drv
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        log_stage(
+            "RUN",
+            "END",
+            f"links={STATS['links_total']} saved={STATS['ads_saved']} skip_seen={STATS['seen_skip']} errors={STATS['errors']} phones={STATS['phones_found']} id={RUN_ID}",
+        )
+        finalize_run_index(extra=STATS)

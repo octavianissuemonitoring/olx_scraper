@@ -1,3 +1,6 @@
+exclude: |
+  (?x)^(archive/|.*_backup\.py|scraper_olx\.backup.*\.py|.*\.bak|.*\.old|.*\.orig|.*~)$
+
 repos:
   - repo: https://github.com/psf/black
     rev: 24.8.0
