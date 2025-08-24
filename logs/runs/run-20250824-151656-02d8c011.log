@@ -1,0 +1,14 @@
+2025-08-24 17:16:56 | INFO    | run=20250824-151656-02d8c011 | [BOOT] STARTING | v1.0.0 | headless=True
+2025-08-24 17:17:40 | INFO    | run=20250824-151656-02d8c011 | [LOGIN] EXECUTING | manual, ai ~90s în fereastră
+2025-08-24 17:19:12 | INFO    | run=20250824-151656-02d8c011 | [LOGIN] END FAIL | nu s-a finalizat autentificarea
+2025-08-24 17:19:12 | INFO    | run=20250824-151656-02d8c011 | [LIST_PAGE] STARTING | url=https://www.olx.ro/oferte/q-inchiriere-autorulota/
+2025-08-24 17:19:31 | INFO    | run=20250824-151656-02d8c011 | [LIST_PAGE] END OK | links=42 | total=6 | skipped autovit=0, other=0
+2025-08-24 17:19:31 | INFO    | run=20250824-151656-02d8c011 | [AD] STARTING | url=https://www.olx.ro/d/oferta/inchirieri-autorulote-5-6-locuri-IDdHiru.html
+2025-08-24 17:19:59 | INFO    | run=20250824-151656-02d8c011 | [AD] END OK | phones=1 | ad_id=IDdHiru | user_id=mhacQ | loc=
+2025-08-24 17:20:00 | INFO    | run=20250824-151656-02d8c011 | [AD] STARTING | url=https://www.olx.ro/d/oferta/ichiriere-autorulota-camper-rulota-de-inchiriere-IDh9Qaf.html
+2025-08-24 17:20:23 | INFO    | run=20250824-151656-02d8c011 | [AD] END OK | phones=1 | ad_id=IDh9Qaf | user_id=aa1F | loc=
+2025-08-24 17:20:24 | INFO    | run=20250824-151656-02d8c011 | [AD] STARTING | url=https://www.olx.ro/d/oferta/inchiriere-autorulota-benimar-340up-IDhU7jV.html
+2025-08-24 17:20:41 | INFO    | run=20250824-151656-02d8c011 | [AD] END OK | phones=1 | ad_id=IDhU7jV | user_id=Ux3XX | loc=
+2025-08-24 17:20:42 | INFO    | run=20250824-151656-02d8c011 | [AD] STARTING | url=https://www.olx.ro/d/oferta/inchiriere-autorulota-autorulota-de-inchiriat-IDj8n88.html
+2025-08-24 17:20:44 | INFO    | run=20250824-151656-02d8c011 | [AD] END FAIL | ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-08-24 17:20:45 | INFO    | run=20250824-151656-02d8c011 | [AD] STARTING | url=https://www.olx.ro/d/oferta/inchirieri-autorulote-de-lux-mobilvetta-carthago-ford-roller-team-IDj7DEp.html
