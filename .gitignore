@@ -15,3 +15,18 @@ olx_cookies.json
 chromedriver.log
 secrets.env
 proxies.json
+# backups / fișiere temporare
+*_backup.py
+*backup*.py
+*.bak
+*.old
+*.orig
+*~
+archive/
+*_backup.py
+*backup*.py
+*.bak
+*.old
+*.orig
+*~
+proxies.json
