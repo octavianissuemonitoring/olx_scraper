@@ -1,0 +1,290 @@
+[
+  {
+    "url": "https://www.olx.ro/sfc/api/v1/users/1ca7da75-eb6b-426d-a56c-9c21f3be9d55/config?platform=desktop",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"platform\":\"desktop\",\"userUUID\":\"1ca7da75-eb6b-426d-a56c-9c21f3be9d55\"}"
+  },
+  {
+    "url": "https://www.unpkg.com/web-vitals@5.1.0/dist/web-vitals.iife.js",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "snippet": "var webVitals=function(e){\"use strict\";let t=-1;const n=e=>{addEventListener(\"pageshow\",(n=>{n.persisted&&(t=n.timeStamp,e(n))}),!0)},i=(e,t,n,i)=>{let s,r;return o=>{t.value>=0&&(o||i)&&(r=t.value-(s??0),(r||void 0===s)&&(s=t.value,t.delta=r,t.rating=((e,t)=>e>t[1]?\"poor\":e>t[0]?\"needs-improvement\":\"good\")(t.value,n),e(t)))}},s=e=>{requestAnimationFrame((()=>requestAnimationFrame((()=>e()))))},r=()=>{const e=performance.getEntriesByType(\"navigation\")[0];if(e&&e.responseStart>0&&e.responseStart<performance.now())return e},o=()=>{const e=r();return e?.activationStart??0},c=(e,n=-1)=>{const i=r();let s=\"navigate\";t>=0?s=\"back-forward-cache\":i&&(document.prerendering||o()>0?s=\"prerender\":document.wasDiscarded?s=\"restore\":i.type&&(s=i.type.replace(/_/g,\"-\")));return{name:e,value:n,rating:\"good\",delta:0,entries:[],id:`v5-${Date.now()}-${Math.floor(8999999999999*Math.random())+1e12}`,navigationType:s}},a=new WeakMap;function d(e,t){return a.get(e)||a.set(e,new t),a.get(e)}class h{t;i=0;o=[];h(e){if(e.hadRecentInput)return;const t=this.o[0],n=this.o.at(-1);this.i&&t&&n&&e.startTime-n.startTime<1e3&&e.startTime-t.startTime<5e3?(this.i+=e.value,this.o.push(e)):(this.i=e.value,this.o=[e]),this.t?.(e)}}const f=(e,t,n={})=>{try{if(PerformanceObserver.supportedEntryTypes.includes(e)){const i=new PerformanceObserver((e=>{Promise.resolve().then((()=>{t(e.getEntries())}))}));return i.observe({type:e,buffered:!0,...n}),i}}catch{}},u=e=>{let t=!1;return()=>{t||(e(),t=!0)}};let l=-1;const m=new Set,v=()=>\"hidden\"!==document.visibilityState||document.prerendering?1/0:0,p=e=>{if(\"hidden\"===document.visibilityState){if(\"visibilitychange\"===e.type)for(const e of m)e();isFinite(l)||(l=\"visibilitychange\"===e.type?e.timeStamp:0,removeEventListener(\"prerenderingchange\",p,!0))}},g=()=>{if(l<0){const e=o(),t=document.prerendering?void 0:globalThis.performance.getEntriesByType(\"visibility-state\").filter((t=>\"hidden\"===t.name&&t.startTime>e))[0]?.startTime;l=t??v(),addEventListener(\"visibilitycha"
+  },
+  {
+    "url": "https://code3.adtlgc.com/js/sati_init.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "snippet": "({name:\"synoScore_Cookie\",set:function(e,o,r){this.shouldSendSameSiteNone()?this.setSecure(e,o,r):this.setNonSecure(e,o,r)},set2:function(e,o,r){this.shouldSendSameSiteNone()?this.setSecure2(e,o,r):this.setNonSecure2(e,o,r)},setNonSecure:function(e,o,r){var i,t;i=new Date,r&&i.setTime(i.getTime()+60*r*60*1e3),t=\"; expires=\"+i.toGMTString(),document.cookie=escape(e)+\"=\"+o+t+\"; path=/\"},setSecure:function(e,o,r){var i,t;i=new Date,r&&i.setTime(i.getTime()+60*r*60*1e3),t=\"; expires=\"+i.toGMTString(),document.cookie=escape(e)+\"=\"+o+t+\"; path=/; SameSite=None; Secure\"},setNonSecure2:function(e,o,r){var i;i=\"; expires=\"+с.toGMTString(),document.cookie=escape(e)+\"=\"+o+i+\"; path=/\"},setSecure2:function(e,o,r){var i;i=\"; expires=\"+r.toGMTString(),document.cookie=escape(e)+\"=\"+o+i+\"; path=/; SameSite=None; Secure\"},get:function(e){var o,r,i,t=document.cookie;if(i=e+\"=\",-1==(r=t.indexOf(\"; \"+i))){if(0!==(r=t.indexOf(i)))return\"\"}else r+=2;return-1==(o=t.indexOf(\";\",r))&&(o=t.length),unescape(t.substring(r+i.length,o))},unset:function(e){return this.set(e,\"\")},init:function(){window[this.name]=this},shouldSendSameSiteNone:function(){return!this.isSameSiteNoneIncompatible(navigator.userAgent)},isSameSiteNoneIncompatible:function(e){return this.hasWebKitSameSiteBug(e)||this.dropsUnrecognizedSameSiteCookies(e)},hasWebKitSameSiteBug:function(e){return this.isIosVersion(12,e)||this.isMacosxVersion(10,14,e)&&(this.isSafari(e)||this.isMacEmbeddedBrowser(e))},dropsUnrecognizedSameSiteCookies:function(e){return this.isUcBrowser(e)?!this.isUcBrowserVersionAtLeast(12,13,2,e):this.isChromiumBased(e)&&this.isChromiumVersionAtLeast(51,e)&&!this.isChromiumVersionAtLeast(67,e)},isIosVersion:function(e,o){var r=o.match(/iP.+;\\sCPU\\s.*OS\\s(\\d+)[_\\d]*.*AppleWebKit/i);return r&&r[1]==e},isMacosxVersion:function(e,o,r){var i=r.match(/Macintosh;\\s.*Mac\\sOS\\sX\\s(\\d+)_(\\d+)[_\\d+]*.*AppleWebKit/i);return i&&i.length>2&&i[1]==e&&i[2]==o},isSafari:function(e){return e.match(/Version.*Safari/i)&&!this.isC"
+  },
+  {
+    "url": "https://khonor.eu-sharedservices.olxcdn.com/api/olx/ro/user/19435706/feedbacks/show",
+    "status": 410,
+    "content_type": "text/plain",
+    "snippet": "Gone"
+  },
+  {
+    "url": "https://comcluster.cxense.com/dmp/push?callback=cXJsonpCB1&ver=3.1.6&persisted=abbd15d14a6bbfadc6fa4d7c4a3fde1461a62659&glb=cx%3A17paycb9lmxly2impdds4my9f1%3A2math9vrc8ep1&json=%7B%22events%22%3A%5B%7B%22type%22%3A%22adBlockerDetection%22%2C%22rnd%22%3A%22meonyrxyoqbwa08s%22%2C%22siteId%22%3A%221135102062960807751%22%2C%22prnd%22%3A%22meonyrwnz2vfru84%22%2C%22userIds%22%3A%5B%7B%22id%22%3A%22meomfbiyvt6govo9%22%2C%22type%22%3A%22cx%22%7D%5D%2C%22origin%22%3A%22brt-adblock%22%2C%22customParameters%22%3A%5B%7B%22group%22%3A%22adBlockerDetected%22%2C%22item%22%3A%22No%22%2C%22type%22%3A%22string%22%7D%5D%7D%5D%7D",
+    "status": 200,
+    "content_type": "text/javascript;charset=utf-8",
+    "snippet": "/**/\ncXJsonpCB1({\"httpStatus\":200,\"response\":{}})"
+  },
+  {
+    "url": "https://api.cxense.com/profile/user/segment?callback=cXJsonpCB2&persisted=993f7e91f41899181a61f3b6fa338bd436cdd1b7&json=%7B%22identities%22%3A%5B%7B%22id%22%3A%22meomfbiyvt6govo9%22%2C%22type%22%3A%22cx%22%7D%5D%7D",
+    "status": 200,
+    "content_type": "text/javascript;charset=utf-8",
+    "snippet": "/**/\ncXJsonpCB2({\"httpStatus\":200,\"response\":{\"segments\":[]}})"
+  },
+  {
+    "url": "https://rating-cdn.css.olx.io/ratings/v1/protected/olxro/user/me/counters",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"receivedRatings\":0,\"placedRatings\":1,\"pendingRatings\":0}"
+  },
+  {
+    "url": "https://www.olx.ro/api/v1/offers/metadata/filters/",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{\"data\":{\"filter_bool_deschis_pt_studenti\":[{\"type\":\"checkbox\",\"label\":\"Deschis pt studenti\",\"unit\":null,\"scope\":\"offer\",\"values\":[],\"options\":[{\"categories\":[4,3286,3287,3288,3289,3290],\"order\":8,\"orderForSearch\":8,\"ranges\":[],\"constraints\":{\"type\":\"string\"},\"fakeCategory\":false},{\"categories\":[52,56,62,1265,1267,1269,1271,1309,1311,1313,1315,1319,1321,1323,1325,1327,1329,1331,1335,1337,1339,1461,1462,1463,1464,1490,1491,1492,1493,1494,1495,1496,1497,1498,1499,1500,1501,1502,1503,1504,1505,1506,1507,1508,1509,1510,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1522,1523,1524,1525,1526,1527,1528,1529,2850,2851,2852,2853,2854,2855,2856,2857,2858,2859,2860,2861,2862,2863,2864,2865,2866,2867,2868,2869,2870,2871,2872,2873,2874,2875,2876,2877,2878,2879,3291,3292,3293,3294],\"order\":10,\"orderForSearch\":10,\"ranges\":[],\"constraints\":{\"type\":\"string\"},\"fakeCategory\":false}]}],\"filter_bool_financing\":[{\"type\":\"checkbox\",\"label\":\"Posibilitate de finantare\",\"unit\":null,\"scope\":\"offer\",\"values\":[],\"options\":[{\"categories\":[2633,2634,2712,2718,2719,2720,2721],\"order\":7,\"orderForSearch\":7,\"ranges\":[],\"constraints\":{\"type\":\"string\"},\"fakeCategory\":false},{\"categories\":[2635],\"order\":6,\"orderForSearch\":6,\"ranges\":[],\"constraints\":{\"type\":\"string\"},\"fakeCategory\":false}]}],\"filter_bool_open_for_people_with_disabilities\":[{\"type\":\"checkbox\",\"label\":\"Rol deschis pentru persoane cu disabilitati\",\"unit\":null,\"scope\":\"offer\",\"values\":[],\"options\":[{\"categories\":[4,52,56,62,649,1265,1267,1269,1271,1309,1311,1313,1315,1319,1321,1323,1325,1327,1329,1331,1335,1337,1339,1461,1462,1463,1464,1473,1474,1475,1476,1477,1478,1479,1480,1497,1516,1517,1518,1519,1520,1521,1522,1523,1524,1525,1526,1527,1528,1529,2851,2852,2853,2854,2855,2856,2857,2858,2859,2860,2861,2862,2863,2864,2865,2866,2867,2868,2869,2870,2871,2872,2873,2874,2875,2876,2877,2878,2879,3286,3287,3288,3289,3290,3291,3292,3293,3294,3299],\"order\":9,\"orderForSearch\":9,\"ranges\":[],\"constraints\":{\"type\":\"string\"},\"fakeCategory\":false"
+  },
+  {
+    "url": "https://btloader.com/trustedIframe.html?o=5162929816076288&tid=Q1jrNtFI-Afj4CB5rV-98d871b68e&upapi=true",
+    "status": 200,
+    "content_type": "text/html",
+    "snippet": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n\n<head>\n  <script type=\"application/javascript\">\n    window.__bt_edge_data = {\n      authorizationError: \"\",\n      websiteID: Number(5647630095876096),\n      orgID: Number(5162929816076288),\n      traceID: \"Q1jrNtFI-Afj4CB5rV-98d871b68e\"\n    };\n    class l {\n  /*\n   * @param logApiURL - The URL to log events to\n   * @param prefix - Prefix for log messages (not used in this implementation)\n   * @param level - The log level\n   * @param sampleRate - The sample rate to log events\n   * @returns Logger - Logger instance\n   */\n  constructor(r, e, o, n) {\n    this.prefix = e, this.level = o, this.sampleRate = n, this.logApiURL = `${r}/log`, this.prefix = e, this.level = o, this.sampleRate = n;\n  }\n  logApiURL;\n  shouldLog(r) {\n    return this.level === \"ERROR\" && r === \"INFO\" ? !1 : Math.random() < this.sampleRate;\n  }\n  /*\n   * Private method to log events to the API\n   * @param {Object} ctx - Log context\n   * @param {Object} body - Event body\n   * @returns {Promise<Response>} - Empty response\n   */\n  async log(r, e) {\n    return await fetch(\n      `${this.logApiURL}?tid=${r.traceID || \"unknown\"}&upapi=true`,\n      {\n        method: \"POST\",\n        body: JSON.stringify({\n          orgID: r.orgID,\n          ...e\n        }),\n        headers: r.headers\n      }\n    );\n  }\n  /*\n   * Log an error event\n   * @param {LogContext} ctx - Log context\n   * @param {string} message - Error message\n   * @param {Error} error - Error object\n   * @param {object} meta - Additional metadata\n   */\n  error = async (r, e, o, n = {}) => {\n    if (this.shouldLog(\"ERROR\"))\n      return await this.log(r, {\n        severity: 4,\n        event: `${this.prefix}.error`,\n        message: e,\n        error: {\n          name: o.message,\n          stack: o.stack\n        },\n        meta: n\n      });\n  };\n  /*\n   * Log an info event\n   * @"
+  },
+  {
+    "url": "https://api.btloader.com/country?o=5162929816076288",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"country\":\"RO\",\"isRestricted\":false}"
+  },
+  {
+    "url": "https://www.olx.ro/sfc/api/v1/offers/289501519/config?platform=desktop",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"platform\":\"desktop\",\"offerID\":289501519,\"features\":[{\"featureType\":\"BOOKING_CALENDAR\",\"guestsEnabled\":false,\"type\":\"BASIC_CALENDAR\",\"unit\":\"DAYS\"}]}"
+  },
+  {
+    "url": "https://region1.google-analytics.com/g/collect?v=2&tid=G-1XTP46N9VR&gtm=45je58k1v875692807za200&_p=1755978001590&gcs=G111&gcd=13v3vPv2v5l1&npa=0&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105399921~105399923~105423367&cid=1846784518.1755975626&ul=en-us&sr=1536x864&ir=1&uaa=&uab=&uafvl=&uamb=0&uam=&uap=Windows&uapv=&uaw=0&are=1&frm=0&pscdl=noapi&_eu=EAAAAAQ&_s=1&sid=1755975625&sct=1&seg=1&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&dt=Inchiriere%20autorulota%20Weinsberg%20Mercedes%20automata%20%7C%20DISCOUNT%2020%25%20Brasov%20%E2%80%A2%20OLX.ro&en=page_view&_c=1&_ee=1&ep.anonymize_ip=true&tfd=61311",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "snippet": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>302 Moved</TITLE></HEAD><BODY>\n<H1>302 Moved</H1>\nThe document has moved\n<A HREF=\"https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&amp;cid=1846784518.1755975626&amp;dbk=1771466081611432574&amp;dma=1&amp;dma_cps=syphamo&amp;en=page_view&amp;gcs=G111&amp;gtm=45je58k1v875692807za200&amp;npa=0&amp;tid=G-1XTP46N9VR&amp;dl=https%3A%2F%2Fwww.olx.ro%3F\">here</A>.\r\n</BODY></HTML>\r\n"
+  },
+  {
+    "url": "https://region1.google-analytics.com/g/collect?v=2&tid=G-1XTP46N9VR&gtm=45je58k1v875692807za200&_p=1755978001590&gcs=G111&gcd=13v3vPv2v5l1&npa=0&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105399921~105399923~105423367&cid=1846784518.1755975626&ul=en-us&sr=1536x864&ir=1&uaa=&uab=&uafvl=&uamb=0&uam=&uap=Windows&uapv=&uaw=0&are=1&frm=0&pscdl=noapi&_eu=EAAAAAQ&_s=2&dt=ad_page&dp=%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&sid=1755975625&sct=1&seg=1&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&en=page_view&_c=1&_ee=1&ep.anonymize_ip=true&ep.user_status=logged&ep.jobs_user_status=&ep.userid=19435706&ep.business_status=normal&epn.cat_l1_id=2667&ep.cat_l1_name=inchiriere-vehicule-echipamente-articole&epn.cat_l2_id=2668&ep.cat_l2_name=inchiriere-vehicule&epn.cat_l3_id=2673&ep.cat_l3_name=inchiriere-alte-vehicule&epn.region_id=4&epn.city_id=26711&ep.region_name=brasov-judet&ep.city_name=brasov&epn.ad_price=109&epn.ad_id=289501519&epn.ad_photo=8&epn.seller_id=4515003&ep.poster_type=private&ep.touch_point_page=adpage_refresh&ep.sell_with_delivery=false&ep.filter_sorting=relevance%3Adesc&ep.keyword=&tfd=61387",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "snippet": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>302 Moved</TITLE></HEAD><BODY>\n<H1>302 Moved</H1>\nThe document has moved\n<A HREF=\"https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&amp;cid=1846784518.1755975626&amp;dbk=636888240896449834&amp;dma=1&amp;dma_cps=syphamo&amp;en=page_view&amp;gcs=G111&amp;gtm=45je58k1v875692807za200&amp;npa=0&amp;tid=G-1XTP46N9VR&amp;dl=https%3A%2F%2Fwww.olx.ro%3F\">here</A>.\r\n</BODY></HTML>\r\n"
+  },
+  {
+    "url": "https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&cid=1846784518.1755975626&dbk=1771466081611432574&dma=1&dma_cps=syphamo&en=page_view&gcs=G111&gtm=45je58k1v875692807za200&npa=0&tid=G-1XTP46N9VR&dl=https%3A%2F%2Fwww.olx.ro%3F",
+    "status": 204,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&cid=1846784518.1755975626&dbk=636888240896449834&dma=1&dma_cps=syphamo&en=page_view&gcs=G111&gtm=45je58k1v875692807za200&npa=0&tid=G-1XTP46N9VR&dl=https%3A%2F%2Fwww.olx.ro%3F",
+    "status": 204,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://btloader.com/trustedIframe.html?o=5162929816076288&tid=Q1jrNtFI-Afj4CB5rV-98d871b68e&upapi=true",
+    "status": 200,
+    "content_type": "text/html",
+    "snippet": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n\n<head>\n  <script type=\"application/javascript\">\n    window.__bt_edge_data = {\n      authorizationError: \"\",\n      websiteID: Number(5647630095876096),\n      orgID: Number(5162929816076288),\n      traceID: \"Q1jrNtFI-Afj4CB5rV-98d871b68e\"\n    };\n    class l {\n  /*\n   * @param logApiURL - The URL to log events to\n   * @param prefix - Prefix for log messages (not used in this implementation)\n   * @param level - The log level\n   * @param sampleRate - The sample rate to log events\n   * @returns Logger - Logger instance\n   */\n  constructor(r, e, o, n) {\n    this.prefix = e, this.level = o, this.sampleRate = n, this.logApiURL = `${r}/log`, this.prefix = e, this.level = o, this.sampleRate = n;\n  }\n  logApiURL;\n  shouldLog(r) {\n    return this.level === \"ERROR\" && r === \"INFO\" ? !1 : Math.random() < this.sampleRate;\n  }\n  /*\n   * Private method to log events to the API\n   * @param {Object} ctx - Log context\n   * @param {Object} body - Event body\n   * @returns {Promise<Response>} - Empty response\n   */\n  async log(r, e) {\n    return await fetch(\n      `${this.logApiURL}?tid=${r.traceID || \"unknown\"}&upapi=true`,\n      {\n        method: \"POST\",\n        body: JSON.stringify({\n          orgID: r.orgID,\n          ...e\n        }),\n        headers: r.headers\n      }\n    );\n  }\n  /*\n   * Log an error event\n   * @param {LogContext} ctx - Log context\n   * @param {string} message - Error message\n   * @param {Error} error - Error object\n   * @param {object} meta - Additional metadata\n   */\n  error = async (r, e, o, n = {}) => {\n    if (this.shouldLog(\"ERROR\"))\n      return await this.log(r, {\n        severity: 4,\n        event: `${this.prefix}.error`,\n        message: e,\n        error: {\n          name: o.message,\n          stack: o.stack\n        },\n        meta: n\n      });\n  };\n  /*\n   * Log an info event\n   * @"
+  },
+  {
+    "url": "https://sdk.fra-02.braze.eu/api/v3/data/",
+    "status": 201,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{}"
+  },
+  {
+    "url": "https://feedgen-io.ew.r.appspot.com/product",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "snippet": "Log received and batched"
+  },
+  {
+    "url": "https://www.googletagmanager.com/static/service_worker/5840/sw_iframe.html?origin=https%3A%2F%2Fwww.olx.ro",
+    "status": 200,
+    "content_type": "text/html",
+    "snippet": "<!DOCTYPE html>\n<html>\n<head>\n  <link rel=\"shortcut icon\" href=\"data:image/x-icon;,\" type=\"image/x-icon\">\n</head>\n<body>\n  <script>\n'use strict';var m={};class n{constructor(a){this.j=a;this.g={};this.h={};this.i=0;this.id=String(Math.floor(Number.MAX_SAFE_INTEGER*Math.random()))}}function p(a){return a.performance&&a.performance.now()||Date.now()}\nvar q=function(a,c){class d{constructor(b,f,g){this.failureType=b;this.data=f;this.g=g;this.h=new n(p(g))}u(b,f){const g=b.clientId;if(b.type===0){b.isDead=!0;var e=this.h,h=p(this.g);e.g[g]==null&&(e.g[g]=0,e.h[g]=h,e.i++);e.g[g]++;b.stats={targetId:e.id,clientCount:e.i,totalLifeMs:Math.round(h-e.j),heartbeatCount:e.g[g],clientLifeMs:Math.round(h-e.h[g])}}b.failure={failureType:this.failureType,data:this.data};f(b)}}return new d(5,a,c)};/*\n\n Copyright Google LLC\n SPDX-License-Identifier: Apache-2.0\n*/\nlet r=globalThis.trustedTypes,t;function u(){let a=null;if(!r)return a;try{const c=d=>d;a=r.createPolicy(\"goog#html\",{createHTML:c,createScript:c,createScriptURL:c})}catch(c){}return a};var v=class{constructor(a){this.g=a}toString(){return this.g+\"\"}};function w(a){const c=a;var d;t===void 0&&(t=u());var b=(d=t)?d.createScriptURL(c):c;return new v(b)}function x(a){if(a instanceof v)return a.g;throw Error(\"\");};function y(a,...c){if(c.length===0)return w(a[0]);let d=a[0];for(let b=0;b<c.length;b++)d+=encodeURIComponent(c[b])+a[b+1];return w(d)}function z(a){var c=y`sw.js`,d=x(c).toString();const b=d.split(/[?#]/),f=/[?]/.test(d)?\"?\"+b[1]:\"\";return A(b[0],f,/[#]/.test(d)?\"#\"+(f?b[2]:b[1]):\"\",a)}\nfunction A(a,c,d,b){function f(e,h){e!=null&&(Array.isArray(e)?e.forEach(l=>f(l,h)):(c+=g+encodeURIComponent(h)+\"=\"+encodeURIComponent(e),g=\"&\"))}let g=c.length?\"&\":\"?\";b.constructor===Object&&(b=Object.entries(b));Array.isArray(b)?b.forEach(e=>f(e[1],e[0])):b.forEach(f);return w(a+c+d)};const B=/Chrome\\/(\\d+)/;var D=function(a){const c=a.origin;if(c){var d=a.o?\"swe.js\":\"sw.js\",b=a.g?y`/static/service_worker/${a.g}/${d}?origin=${c}`:y"
+  },
+  {
+    "url": "https://www.google.com/ccm/collect?en=page_view&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&scrsrc=www.googletagmanager.com&frm=0&rnd=1584610106.1755978017&dt=Inchiriere%20autorulota%20Weinsberg%20Mercedes%20automata%20%7C%20DISCOUNT%2020%25%20Brasov%20%E2%80%A2%20OLX.ro&auid=318955798.1755975623&navt=r&npa=0&gdpr=1&gdpr_consent=CQWmRPAQWmRPAAcABBROB5F8AP_gAAAAAAYgJwtR3G_fbXlj-T51afpkeYxf99hqrsQxBgbJk24FyLvW_JwS32E7NAxapqYKmRIAu3TBIQFlHIDUBUCgKIgVrTDMaEyEoTNKJ6BEiBMRY2JYCFxvm4FDeQCY5trtdld5mR-N7dr82dzyy4hnn3Kp_2S1WJCdIYcgAAAAAAAAAAAAAAAQAAAAFAAAAQAIAAAAAAAAAAAAAAAAAAAAF_YAAACgkD8ABcAFAAVAA4AB4AEEALwA1AB4AEwAKoAbwA_ACEgEMARIAjgBWgDAAGHAMoAywBsgDngHcAd8A9gD4gH2AfoBAACKQEXARgAjUBJQEmgJ-AoMBUAFXALmAXoAxQBogDaAG4AOIAe0BDsCPQJEATsAocBR4CkQFNgLYAXIAuwBd4C8wGGwMjAyQBk4DLgGZgM5gauBrIDYwG3gN1AcmA5cCFwQAsAA4AEgARwCDgEcAJoAlYBMoCbQFIALCAWIAvIBf4DEAGLAMhAaMA1MBtADbgG6DoIgAC4AKAAqABwAEEALgA1AB4AEwAKsAXABdADeAH6AQwBEgCjAFaAMAAYYAygBogDZAHPAO4A7wB7QD7AP2AigCMQEdASaAn4CgwFRAVcAsQBc4C8gL0AYoA2gBuADiAHtAPsAh0BF8CPQJEATIAnYBQ8CjwKQgU0BTYCrAFigLYAW6AuABckC7ALtAXeAvMBfQDDQGPQMjAySBk4GVQMsAy4BmYDOQGmwNXA1gBt4DdQHFgOTAcuOATwAOAA8AC4AJAAjgBQADQAI4AZYA5ACAQEHAQgAjgBNACoAHSAQgAlYBMQCZQE2gKTAV2AsQBagC_wGIAMWAZCAyYBowDUwGvANoAbYA24BugDjwHLQOdA58hAcAAWABQAFwANQAqgBcADeAMAAc8A7gDvAIoASkAoMBUQFXALmAYoA2gCPQFNAKsAWKAtEBcAC5AF2AMjAZOAzkgASAAeAGgAZYA5ACOAFiATaApMBYgC8gGeANGAamA2wBtwDdAHLAOfJQHwAFgAUAA4ADwAJgAVQAuQCGAIkARwAowBWgDAAGyAO8AfkBUQFXALmAYoBDoCL4EegSIAo8BYoC2AF2ALzgZGBkgDJwGcgNYAbeSAJAAXACOAO4AgABBwCOAFQASsAmIBNoCkwF_gMWAZYAzwBuQDdAHLFIG4AC4AKAAqABwAEAANAAeABMACqAH6AQwBEgCjAFaAMAAZQA0QBsgDnAHfAPwA_QCLAEYgI6AkoBQYCogKuAXMAvIBigDaAG4APaAfYBDoCL4EegSIAnYBQ4CkAFNgKsAWKAtgBcAC5AF2gLzAX0Aw2BkYGSAMngZYBlwDOYGsAayA28BuoDkygB0AC4AJAAXAAyACOAI4AZYA5AB3AD7AIAAQcAsQBrwDtgH_ATEAm0BUgCuwF5AMWAZMAzwBowDUwGvAN0Acs.f_wAAAAAAAAA&gtm=45He58k1v831751052za200zd831751052&gcs=G111&gcd=13v3v3v2v5l1&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105102052~105399921~105399923~105423367&tft=1755978016712&tfd=67051&apve=1&apvf=sb",
+    "status": 200,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://ams.creativecdn.com/tags/v2?type=json",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "[{\"url\":\"https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA\",\"type\":\"IFRAME\"}]"
+  },
+  {
+    "url": "https://bam.nr-data.net/1/NRBR-4b04b28ea1f542d97be?a=66672666&sa=1&v=1.249.0&t=Unnamed%20Transaction&rst=69572&ck=0&s=d4d6af4429435390&ref=https://www.olx.ro/d/oferta/inchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&af=err,xhr,stn,ins,spa&be=29141&fe=37873&dc=1588&fsh=0&perf=%7B%22timing%22:%7B%22of%22:1755977949661,%22n%22:0,%22f%22:14,%22dn%22:14,%22dne%22:14,%22c%22:324,%22s%22:8500,%22ce%22:9332,%22rq%22:9334,%22rp%22:29142,%22rpe%22:29432,%22di%22:30659,%22ds%22:30729,%22de%22:30729,%22dc%22:67000,%22l%22:67003,%22le%22:67014%7D,%22navigation%22:%7B%22ty%22:1%7D%7D&fp=30328&fcp=30328",
+    "status": 200,
+    "content_type": "text/plain",
+    "snippet": "{\"stn\":0,\"err\":1,\"ins\":1,\"spa\":1,\"sr\":0,\"srs\":0,\"st\":1,\"sts\":0,\"log\":0,\"app\":{\"agents\":[{\"entityGuid\":\"MTM2NjYwNnxCUk9XU0VSfEFQUExJQ0FUSU9OfDY3MjE1Mzky\"}],\"nrServerTime\":1755978020668}}"
+  },
+  {
+    "url": "https://www.olx.ro/api/v1/offers/?user_id=4515003&offset=0&limit=16",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{\"data\":[{\"id\":289989701,\"url\":\"https://www.olx.ro/d/oferta/land-rover-discovery-sport-land-rover-discovery-sport-2-0-td4-4x4-panoramic-IDjCLzf.html\",\"title\":\"Land Rover Discovery Sport Land Rover Discovery Sport 2.0 TD4 - 4X4 - panoramic\",\"last_refresh_time\":\"2025-08-22T22:23:24+03:00\",\"created_time\":\"2025-07-15T10:17:07+03:00\",\"valid_to_time\":\"2025-09-15T12:20:29+03:00\",\"pushup_time\":\"2025-08-22T22:23:24+03:00\",\"omnibus_pushup_time\":\"2025-08-22T22:23:24+03:00\",\"description\":\"Land Rover Discovery Sport 2.0 TD4 - TRACTIUNE INTEGRALA - Diesel - Automatic - 150 hp\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2705 Recent importat, stare impecabila!\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2705 Factura Fiscala - Km Certificati\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2705 TVA deductibil partial\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2705 Raport istoric CarVertical\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2705 Accept verificare in orice service autorizat\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nDotari:\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2734\\ufe0f Tractiune integrala\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2734\\ufe0fPanoramic\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2734\\ufe0fTapiterie piele\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2734\\ufe0fIncalzire scaune fata\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\n\\u2734\\ufe0fScaune fata reglabile electric\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nSistem sunet Meridian\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nFaruri cu xenon\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nSistem de sp\\u0103lare a farurilor\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nCamera marsalier\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nSenzori parcare fata + spate\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nBluetooth\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nC\\u00e2rlig de remorcare\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nKeyless GO\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nAvertizare unghi mort\\u003Cbr /\\u003E\\n\\u003Cbr /\\u003E\\nPret: Brut\\u003Cbr /\\u003E\\nCuloare: Negru\\u003Cbr /\\u003E\\nVIN (serie sasiu): SALCA2BN2HH675899 \\u003Cbr /\\u003E\\nEmisii CO2: 173 g/km\\u003Cbr"
+  },
+  {
+    "url": "https://www.googletagmanager.com/static/service_worker/5840/sw.js?origin=https%3A%2F%2Fwww.olx.ro",
+    "status": 200,
+    "content_type": "text/javascript",
+    "snippet": "'use strict';var aa={},ba=function(a){function b(d){return a.next(d)}function c(d){return a.throw(d)}return new Promise(function(d,e){function f(g){g.done?d(g.value):Promise.resolve(g.value).then(b,c).then(f,e)}f(a.next())})},h=function(a){return ba(a())};/*\n\n Copyright The Closure Library Authors.\n SPDX-License-Identifier: Apache-2.0\n*/\nvar l=null,p=function(a){const b=a.length;let c=b*3/4;c%3?c=Math.floor(c):\"=.\".indexOf(a[b-1])!=-1&&(c=\"=.\".indexOf(a[b-2])!=-1?c-2:c-1);const d=new Uint8Array(c);let e=0;ca(a,function(f){d[e++]=f});return e!==c?d.subarray(0,e):d},ca=function(a,b){function c(e){for(;d<a.length;){const f=a.charAt(d++),g=l[f];if(g!=null)return g;if(!/^[\\s\\xa0]*$/.test(f))throw Error(\"Unknown base64 encoding at char: \"+f);}return e}da();let d=0;for(;;){const e=c(-1),f=c(0),g=c(64),k=c(64);if(k===64&&e===-1)break;b(e<<\n2|f>>4);g!=64&&(b(f<<4&240|g>>2),k!=64&&b(g<<6&192|k))}},da=function(){if(!l){l={};var a=\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\".split(\"\"),b=[\"+/=\",\"+/\",\"-_=\",\"-_.\",\"-_\"];for(let c=0;c<5;c++){const d=a.concat(b[c].split(\"\"));for(let e=0;e<d.length;e++){const f=d[e];l[f]===void 0&&(l[f]=e)}}}};/*\n\n Copyright 2020 Google LLC\n SPDX-License-Identifier: Apache-2.0\n*/\nvar u=class extends Error{constructor(a){super(a);Object.setPrototypeOf(this,u.prototype)}};u.prototype.name=\"SecurityException\";var v=class extends Error{constructor(a){super(a);Object.setPrototypeOf(this,v.prototype)}};v.prototype.name=\"InvalidArgumentsException\";function A(...a){let b=0;for(let e=0;e<arguments.length;e++)b+=arguments[e].length;const c=new Uint8Array(b);let d=0;for(let e=0;e<arguments.length;e++)c.set(arguments[e],d),d+=arguments[e].length;return c}function C(a){const b=a.replace(/-/g,\"+\").replace(/_/g,\"/\");return D(globalThis.atob(b))}function F(a){let b=\"\";for(let c=0;c<a.length;c+=1)b+=String.fromCharCode(a[c]);return globalThis.btoa(b).replace(/=/g,\"\").replace(/\\+/g,\"-\").replace(/\\//g,\"_\")}\nfunction D(a){const b=[];let c=0;for(let d="
+  },
+  {
+    "url": "https://www.olx.ro/apigateway/graphql",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{\"data\":{\"clientCompatibleRecommendedAdsByAdId\":{\"data\":[{\"_nodeId\":\"bGVnYWN5QWR2ZXJ0OjI2NDU3MjIyNA==\",\"business\":true,\"category\":{\"_nodeId\":\"Y2F0ZWdvcnk6MjY3OA==\",\"id\":2678,\"type\":\"services\"},\"contact\":{\"chat\":true,\"courier\":false,\"name\":\"remarxtraduceri\",\"negotiation\":true,\"phone\":true},\"created_time\":\"2024-01-09T12:14:30+02:00\",\"delivery\":{\"rock\":{\"active\":false,\"mode\":null,\"offer_id\":null}},\"description\":\"Salut! Suntem Bare Necessities și vă<br />\\n propunem spre închiriere o autorulotă din 2020, pe șasiu Ford -euro 6, sigură și versatilă pentru următoarea voastră aventură sau \\\"chill-eală\\\". <br />\\n•Confortul & siguranța: Senzori de parcare, camera marṣarier, senzor (alarma) scurgeri gaz inclusiv gaze narcotice, suport biciclete, AC cabina, planșe termo pentru geamurile cabinei, extralock la ușa celulei.<br />\\n<br />\\n• Autorulota noastră are o capacitate de 5 persoane și are alocate doua paturi matrimoniale de câte două persoane și unul acționat electric de o persoană (max. 100kg).<br />\\n•Bucătăria dispune de un aragaz cu 3 ochiuri, chiuveta, frigider cu funcție de alimentare trivalentă (curent 12v, 220v sau gaz), multiple spații de depozitare și desigur spațiu de gătit compact și modular astfel încât experiența de gătit să fie cât mai facilă și plăcută.<br />\\n• Autorulota dispune de lenjerii, pilote, perne, prosoape<br />\\n•Baia dotată cu wc thetford cu golire exterioară, cabina duș, chiuvetă și spații de depozitare.<br />\\n-Apa caldă pentru baie și bucătărie este furnizata de către centrala termică pe gaz turma.<br />\\n-Căldura în autorulotă este prin sistem webasto cu alimentare directa din rezervorul de motorină al mașinii.<br />\\n<br />\\n• Pentru toate funcționalitățile autorulotei se oferă \\\"training\\\" la momentul închirierii și asistență 24/24 telefonică pe durata sejurului.<br />\\n<br />\\nCâțiva termeni și condiții<br />\\n• Prețul de închiriere variază în funcție de durata sejurului și perioada anului.<br />\\nIanuarie – martie : 100 euro/zi<br />\\n"
+  },
+  {
+    "url": "https://bam.nr-data.net/ins/1/NRBR-4b04b28ea1f542d97be?a=66672666&sa=1&v=1.249.0&t=Unnamed%20Transaction&rst=71173&ck=0&s=d4d6af4429435390&ref=https://www.olx.ro/d/oferta/inchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html",
+    "status": 204,
+    "content_type": "application/json; charset=UTF-8",
+    "snippet": ""
+  },
+  {
+    "url": "https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA",
+    "status": 200,
+    "content_type": "text/html;charset=utf-8",
+    "snippet": "<html><head></head><body>\n<script>\nfunction ignoreAsyncResult(x) { }\n\nfunction readResponse(r) {\n    try {\n        if (r.ok) {\n            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);\n        }\n    } catch (e) { }\n}\n\nfunction handleTopics(result) {\n    try {\n        if (Array.isArray(result)) {\n            var topicIds = result.map(function (topic) {\n                return topic.topic;\n            });\n            if (topicIds.length > 0 || Math.random() < 0.001) {\n                fetch('https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA&t=' + topicIds.join(','))\n                    .then(readResponse, ignoreAsyncResult);\n            }\n        }\n    } catch (e) { }\n}\n\ntry {\n    if (document.browsingTopics) {\n        document.browsingTopics()\n            .then(handleTopics, ignoreAsyncResult);\n    }\n} catch (e) { }\n</script>\n</body></html>\n"
+  },
+  {
+    "url": "https://ams.creativecdn.com/tags/v2?type=json",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "[{\"url\":\"https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA\",\"type\":\"IFRAME\"}]"
+  },
+  {
+    "url": "https://ams.creativecdn.com/tags/v2?type=json",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "[{\"url\":\"https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA\",\"type\":\"IFRAME\"}]"
+  },
+  {
+    "url": "https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA",
+    "status": 200,
+    "content_type": "text/html;charset=utf-8",
+    "snippet": "<html><head></head><body>\n<script>\nfunction ignoreAsyncResult(x) { }\n\nfunction readResponse(r) {\n    try {\n        if (r.ok) {\n            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);\n        }\n    } catch (e) { }\n}\n\nfunction handleTopics(result) {\n    try {\n        if (Array.isArray(result)) {\n            var topicIds = result.map(function (topic) {\n                return topic.topic;\n            });\n            if (topicIds.length > 0 || Math.random() < 0.001) {\n                fetch('https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA&t=' + topicIds.join(','))\n                    .then(readResponse, ignoreAsyncResult);\n            }\n        }\n    } catch (e) { }\n}\n\ntry {\n    if (document.browsingTopics) {\n        document.browsingTopics()\n            .then(handleTopics, ignoreAsyncResult);\n    }\n} catch (e) { }\n</script>\n</body></html>\n"
+  },
+  {
+    "url": "https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA",
+    "status": 200,
+    "content_type": "text/html;charset=utf-8",
+    "snippet": "<html><head></head><body>\n<script>\nfunction ignoreAsyncResult(x) { }\n\nfunction readResponse(r) {\n    try {\n        if (r.ok) {\n            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);\n        }\n    } catch (e) { }\n}\n\nfunction handleTopics(result) {\n    try {\n        if (Array.isArray(result)) {\n            var topicIds = result.map(function (topic) {\n                return topic.topic;\n            });\n            if (topicIds.length > 0 || Math.random() < 0.001) {\n                fetch('https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA&t=' + topicIds.join(','))\n                    .then(readResponse, ignoreAsyncResult);\n            }\n        }\n    } catch (e) { }\n}\n\ntry {\n    if (document.browsingTopics) {\n        document.browsingTopics()\n            .then(handleTopics, ignoreAsyncResult);\n    }\n} catch (e) { }\n</script>\n</body></html>\n"
+  },
+  {
+    "url": "https://region1.google-analytics.com/g/collect?v=2&tid=G-1XTP46N9VR&gtm=45je58k1v875692807za200&_p=1755978001590&gcs=G111&gcd=13v3vPv2v5l1&npa=0&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105399921~105399923~105423367&gdid=dYWJhMj&cid=1846784518.1755975626&ul=en-us&sr=1536x864&ir=1&uaa=&uab=&uafvl=&uamb=0&uam=&uap=Windows&uapv=&uaw=0&are=1&frm=0&pscdl=noapi&_eu=EAAAAAQ&_s=3&sid=1755975625&sct=1&seg=1&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&dt=Inchiriere%20autorulota%20Weinsberg%20Mercedes%20automata%20%7C%20DISCOUNT%2020%25%20Brasov%20%E2%80%A2%20OLX.ro&en=reply_phone_1step&_c=1&_ee=1&ep.anonymize_ip=true&ep.debug_mode=true&ep.event_category=reply&ep.event_label=reply_phone_1step&ep.user_status=logged&ep.jobs_user_status=&ep.userid=19435706&ep.business_status=normal&epn.cat_l1_id=2667&ep.cat_l1_name=inchiriere-vehicule-echipamente-articole&epn.cat_l2_id=2668&ep.cat_l2_name=inchiriere-vehicule&epn.cat_l3_id=2673&ep.cat_l3_name=inchiriere-alte-vehicule&epn.region_id=4&epn.city_id=26711&ep.region_name=brasov-judet&ep.city_name=brasov&epn.ad_price=109&epn.ad_id=289501519&epn.ad_photo=8&epn.seller_id=4515003&ep.poster_type=private&ep.touch_point_page=adpage_refresh&ep.sell_with_delivery=false&ep.filter_sorting=relevance%3Adesc&ep.keyword=&ep.touch_point_button=call&_et=126&tfd=71696",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "snippet": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>302 Moved</TITLE></HEAD><BODY>\n<H1>302 Moved</H1>\nThe document has moved\n<A HREF=\"https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&amp;cid=1846784518.1755975626&amp;dbk=6085157301625965552&amp;dma=1&amp;dma_cps=syphamo&amp;en=reply_phone_1step&amp;gcs=G111&amp;gtm=45je58k1v875692807za200&amp;npa=0&amp;tid=G-1XTP46N9VR&amp;dl=https%3A%2F%2Fwww.olx.ro%3F\">here</A>.\r\n</BODY></HTML>\r\n"
+  },
+  {
+    "url": "https://www.facebook.com/tr?id=479352877492007&ev=Contact&cd[content_category]=inchiriere-vehicule-echipamente-articole&cd[cat_l2_name]=inchiriere-vehicule&cd[cat_l3_name]=inchiriere-alte-vehicule&cd[value]=109&cd[currency]=EUR&cd[content_ids]=289501519&cd[ad_featured]=%5Bbundle_premium%5D&cd[content_name]=&cd[sell_with_delivery]=false&cd[search_string]=",
+    "status": 200,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://ams.creativecdn.com/tags/v2?type=json",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "[{\"url\":\"https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA\",\"type\":\"IFRAME\"}]"
+  },
+  {
+    "url": "https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&cid=1846784518.1755975626&dbk=6085157301625965552&dma=1&dma_cps=syphamo&en=reply_phone_1step&gcs=G111&gtm=45je58k1v875692807za200&npa=0&tid=G-1XTP46N9VR&dl=https%3A%2F%2Fwww.olx.ro%3F",
+    "status": 204,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://friction.olxgroup.com/challenge",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"challenge\":{\"id\":\"a8e61890-8599-40d5-ae36-b9162f185d99\",\"type\":\"blank\"},\"context\":\"AQICAHi3+BTvjzRFUsNdrt7mCe5ZtDW2IWbZMMvYsJ1G5E8EXAGlLeIjC23MDS+vcTIHrSSpAAAB7zCCAesGCSqGSIb3DQEHBqCCAdwwggHYAgEAMIIB0QYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAyy3uoNpSX+UK14UFUCARCAggGia0M4wRnR1A+NTyJtB/D5yLMQKgENNVGYDntzdOmyOBcc5hpC720v4YqVYOrKT7rJADy8VYiiyusMHS8qU1nGH42mTxcz4olHXlPewTpQEnff61URCWWOe6IvXn9LJHiJOL+MvguJDbA4NKQzj19eqAIkbJziflRsaaTEZHRT+AIAB6knsDqKYRAQvCjvcJ4B4QbVjUM2Xs+4WW5xTMaxvG6Q7ySdTQziKSuLBDJGow8T+Joq6BDOTgHxDTlulmPliW335/rZKOnANS6vV6L0QpdWPFAQIe5jHmeXgAWIAeIzElMOje+XgxhslyvmQnlo98ALuwpljwPc6BoeaSx3xvXzbPsUrhQ88N7EmbNI/7VV41alnB+gLTQ017NrsGr1IL+g8B+h54hxhQtA6Tdf89v41YV1/bV+/Eeg0bghQgAPThJ8ExVmCyq7e6frxQvPneErZ0WBmcESJyglGZ94BPu1GrR+AuDrTPGZlc902+FlEEqT4mBcDcTFbkx4shjxshXfPiuD4q53Vrjflt+V5B43h91y8uqlqpW6h2BFwTcmkg\"}"
+  },
+  {
+    "url": "https://ams.creativecdn.com/tags/v2?type=json",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "[{\"url\":\"https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA\",\"type\":\"IFRAME\"}]"
+  },
+  {
+    "url": "https://www.facebook.com/tr?id=479352877492007&ev=Contact&cd[content_category]=inchiriere-vehicule-echipamente-articole&cd[cat_l2_name]=inchiriere-vehicule&cd[cat_l3_name]=inchiriere-alte-vehicule&cd[value]=109&cd[currency]=EUR&cd[content_ids]=289501519&cd[ad_featured]=%5Bbundle_premium%5D&cd[content_name]=&cd[sell_with_delivery]=false&cd[search_string]=",
+    "status": 200,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://region1.google-analytics.com/g/collect?v=2&tid=G-1XTP46N9VR&gtm=45je58k1v875692807za200&_p=1755978001590&gcs=G111&gcd=13v3vPv2v5l1&npa=0&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105399921~105399923~105423367&gdid=dYWJhMj&cid=1846784518.1755975626&ul=en-us&sr=1536x864&ir=1&uaa=&uab=&uafvl=&uamb=0&uam=&uap=Windows&uapv=&uaw=0&are=1&frm=0&pscdl=noapi&_eu=EAAAAAQ&_s=4&sid=1755975625&sct=1&seg=1&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&dt=Inchiriere%20autorulota%20Weinsberg%20Mercedes%20automata%20%7C%20DISCOUNT%2020%25%20Brasov%20%E2%80%A2%20OLX.ro&en=reply_phone_1step&_c=1&_ee=1&ep.anonymize_ip=true&ep.debug_mode=true&ep.event_category=reply&ep.event_label=reply_phone_1step&ep.user_status=logged&ep.jobs_user_status=&ep.userid=19435706&ep.business_status=normal&epn.cat_l1_id=2667&ep.cat_l1_name=inchiriere-vehicule-echipamente-articole&epn.cat_l2_id=2668&ep.cat_l2_name=inchiriere-vehicule&epn.cat_l3_id=2673&ep.cat_l3_name=inchiriere-alte-vehicule&epn.region_id=4&epn.city_id=26711&ep.region_name=brasov-judet&ep.city_name=brasov&epn.ad_price=109&epn.ad_id=289501519&epn.ad_photo=8&epn.seller_id=4515003&ep.poster_type=private&ep.touch_point_page=ad_page&ep.sell_with_delivery=false&ep.filter_sorting=relevance%3Adesc&ep.keyword=&ep.touch_point_button=show_phone&_et=2176&tfd=73882",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "snippet": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>302 Moved</TITLE></HEAD><BODY>\n<H1>302 Moved</H1>\nThe document has moved\n<A HREF=\"https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&amp;cid=1846784518.1755975626&amp;dbk=15525304125081114185&amp;dma=1&amp;dma_cps=syphamo&amp;en=reply_phone_1step&amp;gcs=G111&amp;gtm=45je58k1v875692807za200&amp;npa=0&amp;tid=G-1XTP46N9VR&amp;dl=https%3A%2F%2Fwww.olx.ro%3F\">here</A>.\r\n</BODY></HTML>\r\n"
+  },
+  {
+    "url": "https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA",
+    "status": 200,
+    "content_type": "text/html;charset=utf-8",
+    "snippet": "<html><head></head><body>\n<script>\nfunction ignoreAsyncResult(x) { }\n\nfunction readResponse(r) {\n    try {\n        if (r.ok) {\n            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);\n        }\n    } catch (e) { }\n}\n\nfunction handleTopics(result) {\n    try {\n        if (Array.isArray(result)) {\n            var topicIds = result.map(function (topic) {\n                return topic.topic;\n            });\n            if (topicIds.length > 0 || Math.random() < 0.001) {\n                fetch('https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA&t=' + topicIds.join(','))\n                    .then(readResponse, ignoreAsyncResult);\n            }\n        }\n    } catch (e) { }\n}\n\ntry {\n    if (document.browsingTopics) {\n        document.browsingTopics()\n            .then(handleTopics, ignoreAsyncResult);\n    }\n} catch (e) { }\n</script>\n</body></html>\n"
+  },
+  {
+    "url": "https://region1.google-analytics.com/privacy-sandbox/register-conversion?_c=1&cid=1846784518.1755975626&dbk=15525304125081114185&dma=1&dma_cps=syphamo&en=reply_phone_1step&gcs=G111&gtm=45je58k1v875692807za200&npa=0&tid=G-1XTP46N9VR&dl=https%3A%2F%2Fwww.olx.ro%3F",
+    "status": 204,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA",
+    "status": 200,
+    "content_type": "text/html;charset=utf-8",
+    "snippet": "<html><head></head><body>\n<script>\nfunction ignoreAsyncResult(x) { }\n\nfunction readResponse(r) {\n    try {\n        if (r.ok) {\n            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);\n        }\n    } catch (e) { }\n}\n\nfunction handleTopics(result) {\n    try {\n        if (Array.isArray(result)) {\n            var topicIds = result.map(function (topic) {\n                return topic.topic;\n            });\n            if (topicIds.length > 0 || Math.random() < 0.001) {\n                fetch('https://ams.creativecdn.com/topics-membership?ntk=O8qiMnPVg4EqUCsYSuIf76onBTtknYpRn3JktTcSW-R4r7CgtIW7ayVKQeSNNpidCLT4UGMcbbuNdw6dr2xgONsKX85wqbn8O8_XCxYwcdA&t=' + topicIds.join(','))\n                    .then(readResponse, ignoreAsyncResult);\n            }\n        }\n    } catch (e) { }\n}\n\ntry {\n    if (document.browsingTopics) {\n        document.browsingTopics()\n            .then(handleTopics, ignoreAsyncResult);\n    }\n} catch (e) { }\n</script>\n</body></html>\n"
+  },
+  {
+    "url": "https://production-graphql.eu-sharedservices.olxcdn.com/graphql",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{\"data\":{\"myAds\":{\"pageViews\":{\"pageViews\":564}}}}\n"
+  },
+  {
+    "url": "https://friction.olxgroup.com/exchange",
+    "status": 200,
+    "content_type": "application/json",
+    "snippet": "{\"token\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkOTVmNTcxLTBkNjgtNGI5YS1hNzkyLThlNWY4YWQzMjIwOSIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdGxhcyIsImFjdGlvbiI6InJldmVhbF9waG9uZV9udW1iZXIiLCJhY3RvciI6eyJ1c2VybmFtZSI6IjFjYTdkYTc1LWViNmItNDI2ZC1hNTZjLTljMjFmM2JlOWQ1NSIsImRlc2lyZWRfZW1haWwiOiIiLCJkZXNpcmVkX3Bob25lIjoiIiwiaXAiOiIxMjguMTI3LjExMi4xODQiLCJpcF9jb3VudHJ5IjoiUk8ifSwic2NlbmUiOnsib3JpZ2luIjoid3d3Lm9seC5ybyIsImFkX2lkIjoiMjg5NTAxNTE5Iiwic2l0ZWNvZGUiOiJvbHhybyJ9LCJpc3MiOiJodHRwczovL2ZyaWN0aW9uLm9seGdyb3VwLmNvbSIsImlhdCI6MTc1NTk3ODAyNSwiZXhwIjoxNzU1OTc4MDQwfQ.v612ChZEB9YiiFH4ZZ_S8JHMUuaTuUTCjhZ4L2dngRHR5gnwdlHFTE3Mmdn0EJmabxea8CE_4Qf_hUx2LaWzRi8Xz1Orbr2ycjt-4V43lJ7PIj7LMrEfqo0h_uJSH_MnUjbBDCiesIcsewUSzABV6yHmxZOZfY_2x-lIPLbMJQ9j_l2ExnNEjwFoSzPFGfUH1TkZILSMj0DOULE6s_8KKmF20Fa4jmMPEckhtyvMx3qamJPa4XfeBUgr5QtsLCnhEDxbeDpvNqDyJvq3dKR9U0npSHvyVTS_PHUykyKkvPM6GioaZwsWfGeKVv6CahrnRP5Se47o_e0F0oCw23936w\"}"
+  },
+  {
+    "url": "https://www.olx.ro/api/v1/offers/289501519/limited-phones/",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "{\"data\":{\"phones\":[\"072 821 0881\"]}}"
+  },
+  {
+    "url": "https://www.olx.ro/api/v1/offers/289501519/phone-view/",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "snippet": "[]"
+  },
+  {
+    "url": "https://region1.google-analytics.com/g/collect?v=2&tid=G-1XTP46N9VR&gtm=45je58k1v875692807za200&_p=1755978001590&gcs=G111&gcd=13v3vPv2v5l1&npa=0&dma_cps=syphamo&dma=1&tcfd=10s5b&tag_exp=101509157~103116026~103200004~103233427~104527906~104528500~104684208~104684211~104948813~105399921~105399923~105423367&gdid=dYWJhMj&cid=1846784518.1755975626&ul=en-us&sr=1536x864&ir=1&uaa=&uab=&uafvl=&uamb=0&uam=&uap=Windows&uapv=&uaw=0&are=1&frm=0&pscdl=noapi&_eu=EAAAAAQ&_s=5&sid=1755975625&sct=1&seg=1&dl=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&dt=Inchiriere%20autorulota%20Weinsberg%20Mercedes%20automata%20%7C%20DISCOUNT%2020%25%20Brasov%20%E2%80%A2%20OLX.ro&en=user_engagement&ep.anonymize_ip=true&_et=50300&tfd=124233",
+    "status": 204,
+    "content_type": "text/plain",
+    "snippet": ""
+  },
+  {
+    "url": "https://comcluster.cxense.com/activity/push?ver=3.1.6&rnd=meonzqtaw4i2uk9f&ckp=meomfbiyvt6govo9&loc=https%3A%2F%2Fwww.olx.ro%2Fd%2Foferta%2Finchiriere-autorulota-weinsberg-mercedes-automata-discount-20-IDjAIzl.html&sid=1135102062960807751&glb=cx%3A17paycb9lmxly2impdds4my9f1%3A2math9vrc8ep1&altm=1755978049923&arnd=meonzqtaw4i2uk9f&aatm=14&axtl=&awsz=1540x772&amvw=1540x3715.199951171875&ascp=16x772&aclk=0&ause=108",
+    "status": 200,
+    "content_type": "application/json;charset=utf-8",
+    "snippet": "{}"
+  }
+]

@@ -1,0 +1,13 @@
+.venv
+__pycache__/
+*.pyc
+out/
+archive/
+*.log
+*.bak
+.git
+.github
+*.xlsx
+*.csv
+*.jsonl
+debug/
